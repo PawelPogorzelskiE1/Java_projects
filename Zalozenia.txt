@@ -26,6 +26,7 @@ Użytkownik może wybrać ile poziomów chce przejść
 Przy uruchomieniu gry pojawia się lista dostępnych operacji:
 1. Nowa gra
 	a) podaj nick:
+		START
 2. Tabela wyników
 3. Ustawienia
 4. Pomoc
