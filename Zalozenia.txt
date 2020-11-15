@@ -1,0 +1,31 @@
+Symulator Polowania na Niedźwiedzia 2020
+
+Plansza składa się z elementów 3 typów:
+-leśny busz - ściany ograniczające poruszanie się
+-postacie:
+	niedźwiedź - awatar użytkownika
+	myśliwy - przeciwnik niedźwiedzia - spotkanie skutkuje utratą życia przez niedźwiedzia
+-collectable:
+	borówki - punkty, których zebranie wymagane jest do ukończenia poziomu
+	porzeczki - bonus zapewniający superumiejętność niedźwiedzia o nazwie "kiedy zwierzyna staje się łowcą"
+
+Punktacja:
+Gra zakłada stworzenie rankingu i dodawanie do niego ukończonych (z powodzeniem lub też nie) gier użytkownika. Punkty, wg których szeregowany będzie ranking zależą od:
+	ilości ukończonych planszy
+	ilości żyć, z jakimi użytkownik skończył grę
+	ilości pokonanych myśliwych
+	poziomu trudności (w zależności od poziomu trudności przy końcu gry mamy inny mnożnik punktów: łatwy - 0,75; normalny - 1; trudny - 1,25)
+
+Poziom trudności:
+Do wyboru n poziomów trudności (najprawdopodobniej 3), poziom będzie wpływać na ilość duchów, ich szybkość, ilość żyć z którymi startuje użytkownik, ilość bonusów na mapie
+
+Wybór planszy:
+Użytkownik może wybrać ile poziomów chce przejść
+(od 1 do k, gdzie k - liczba zaimplementowanych poziomów), zanim gra dobiegnie końca (o ile nie straci wcześniej wszystkich żyć)
+
+Przy uruchomieniu gry pojawia się lista dostępnych operacji:
+1. Nowa gra
+	a) podaj nick:
+2. Tabela wyników
+3. Ustawienia
+4. Pomoc
