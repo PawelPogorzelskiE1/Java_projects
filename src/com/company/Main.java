@@ -6,3 +6,9 @@ public class Main {
 	// Test commit
     }
 }
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, Paweł!");
+    }
+}
+
