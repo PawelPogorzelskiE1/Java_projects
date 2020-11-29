@@ -11,9 +11,3 @@ class HelloWorld {
         System.out.println("Hello, Paweł!");
     }
 }
-
-class WitajWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, Paweł!");
-    }
-}

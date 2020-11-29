@@ -1,4 +1,8 @@
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Scanner; // Import the Scanner class to read text files
 package com.company;
+
 /* wygląd pliku konfiguracyjnego
         x y
     s s s s s s s
@@ -16,40 +20,35 @@ package com.company;
 
 
 public class MapParsing {
-    /*
-    String line = new String ReadLine()
-    int x = parseInt(line(1));
-    int y = parseInt(line(3));
-    tworz Plansza (x,y)
-    pętla (y)
-        {
-        String line = new String ReadLine()
-        pętla (x)
-            {
-            wyraz = line(2*x-1)
-            if wyraz==s
-            macierz (x,y)=sciana;
-            else if wyraz==p
-            macierz (x,y)=polewolne;
-            else if wyraz==M
-            macierz (x,y)=spawnMysliwego;
-            else if wyraz==B
-            macierz (x,y)=spawnBorowki;
-            else if wyraz==P
-            macierz (x,y)=spawnPorzeczki;
-            else throw przekroczono zakres
+    public MapConfig LevelRead(String filename) {
+        try {
+            File myMap = new File(filename);
+            Scanner myLine = new Scanner(myMap);
+            myLine.useDelimiter(" ");
+            int x = Integer.valueOf(myLine);
+            myLine.useDelimiter("\n");
+            int y = Integer.valueOf(myLine);
+            int j = 0;
+            for (int i = 0; i < y; i++) {
+                j = 0;
+                char tmp = myLine.next().charAt(0);
+                while (tmp != "\n") {
+                    if (tmp != " ") {
+                        LevelRead.matrix[i][j];
+                    } else {
+                        tmp = myLine.next().charAt(0);
+                    }
+                    j++;
+                }
+            }
+            for (int i = 0; i < 3; i++) {
+                myLine.useDelimiter(" ");
+                params[i] = Integer.valueOf(myLine);
             }
         }
-    do
-    {
-        String line = new String ReadLine()
+        catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        return matrix;
     }
-    while (line!="\n")
-    String line = new String ReadLine()
-    int Params(3);
-    Params(1)=line(1);
-    Params(2)=line(3);
-    Params(3)=line(5);
-    return(Plansza, params);
-     */
-}
