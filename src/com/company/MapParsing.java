@@ -19,6 +19,7 @@ import java.util.Scanner; // Import the Scanner class to read text files
 
 public class MapParsing {
     public MapConfig LevelRead(String filename) {
+        MapConfig Overall=new MapConfig();
         try {
             File myMap = new File(filename);
             Scanner myLine = new Scanner(myMap);
@@ -39,10 +40,11 @@ public class MapParsing {
                 parts = tmp.split(" ");
                 result.params[i] = Integer.valueOf(parts[i]);
             }
+            Overall=result;
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
-        }as
-        return result;
+        }
+        return Overall;
     }
 }

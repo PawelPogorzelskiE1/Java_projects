@@ -9,5 +9,9 @@ public class MapConfig {
         matrix = new String[x][y];
         params = new int[3];
     }
+    public MapConfig()
+    {
+
+    }
 
 }
