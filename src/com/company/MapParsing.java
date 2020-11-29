@@ -42,7 +42,7 @@ public class MapParsing {
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
-        }
+        }as
         return result;
     }
 }
