@@ -12,9 +12,6 @@ package com.company;
     s p s s s p s
     s p p p p p s
     s s s s s s s
-
-
-
     3 (ilość porzeczek) 5 (ilość borówek) 2 (ilość mysliwych)
  */
 
