@@ -1,7 +1,8 @@
+package com.company;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
-package com.company;
+
 
 /* wygląd pliku konfiguracyjnego
         x y
@@ -21,31 +22,27 @@ public class MapParsing {
         try {
             File myMap = new File(filename);
             Scanner myLine = new Scanner(myMap);
-            myLine.useDelimiter(" ");
-            int x = Integer.valueOf(myLine);
-            myLine.useDelimiter("\n");
-            int y = Integer.valueOf(myLine);
-            int j = 0;
+            String tmp = myLine.nextLine();
+            String[] parts = tmp.split(" ");
+            int x = Integer.valueOf(parts[0]);
+            int y = Integer.valueOf(parts[1]);
+            MapConfig result = new MapConfig(x, y);
             for (int i = 0; i < y; i++) {
-                j = 0;
-                char tmp = myLine.next().charAt(0);
-                while (tmp != "\n") {
-                    if (tmp != " ") {
-                        LevelRead.matrix[i][j];
-                    } else {
-                        tmp = myLine.next().charAt(0);
-                    }
-                    j++;
+                tmp = myLine.nextLine();
+                parts = tmp.split(" ");
+                for (int j = 0; j < x; j++) {
+                    result.matrix[i][j] = parts[j];
                 }
             }
             for (int i = 0; i < 3; i++) {
-                myLine.useDelimiter(" ");
-                params[i] = Integer.valueOf(myLine);
+                tmp = myLine.nextLine();
+                parts = tmp.split(" ");
+                result.params[i] = Integer.valueOf(parts[i]);
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        return matrix;
+        return result;
     }
+}
