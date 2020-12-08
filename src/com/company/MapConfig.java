@@ -1,5 +1,6 @@
 package com.company;
 
+// AB: brak komentarzy javadoc!
 public class MapConfig {
     public String[][] matrix;
     public int [] params;
