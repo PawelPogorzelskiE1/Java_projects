@@ -32,12 +32,13 @@ public class MapParsing {
                 tmp = myLine.nextLine();
                 parts = tmp.split(" ");
                 for (int j = 0; j < x; j++) {
-                    result.matrix[i][j] = parts[j];
+                    result.matrix[j][i] = parts[j];
+
                 }
             }
+            tmp = myLine.nextLine();
+            parts = tmp.split(" ");
             for (int i = 0; i < 3; i++) {
-                tmp = myLine.nextLine();
-                parts = tmp.split(" ");
                 result.params[i] = Integer.valueOf(parts[i]);
             }
             Overall=result;
@@ -45,6 +46,7 @@ public class MapParsing {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        System.out.println(Overall);
         return Overall;
     }
 }

@@ -1,13 +1,13 @@
 package com.company;
 
-public class Main {
 
-    public static void main(String[] args) {
-	// Test commit
-    }
-}
-class HelloWorld {
+class Main {
     public static void main(String[] args) {
         System.out.println("Hello, Paweł!");
+        MapParsing config = new MapParsing();
+        config.LevelRead("Config1.txt");
     }
+
 }
+
+
