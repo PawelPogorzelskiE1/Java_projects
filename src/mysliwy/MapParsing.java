@@ -18,7 +18,7 @@ import java.util.Scanner; // Import the Scanner class to read text files
 
 
 public class MapParsing {
-    public MapConfig LevelRead(String filename) {
+    public static MapConfig LevelRead(String filename) {
         MapConfig Overall=new MapConfig();
         try {
             File myMap = new File(filename);
