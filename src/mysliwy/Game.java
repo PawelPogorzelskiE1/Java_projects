@@ -10,7 +10,7 @@ public class Game extends JPanel implements ActionListener {
     private Dimension m;
 
 
-
+    MapConfig tmp=MapParsing.LevelRead("Config1");
 
 
 
