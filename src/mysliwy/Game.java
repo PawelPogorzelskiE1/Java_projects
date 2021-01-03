@@ -1,3 +1,4 @@
+/*
 package mysliwy;
 
 import java.util.Arrays;
@@ -32,7 +33,7 @@ public class Game extends JPanel implements ActionListener {
     private int pacman_x, pacman_y, pacmand_x, pacmand_y;
     private int req_dx, req_dy;
 
-    private final MapConfig levelData = tmp[]; // tu wjeżdza mapka z Map Parsing
+    //private final MapConfig levelData = tmp[]; // tu wjeżdza mapka z Map Parsing
 
    System.out.println(Arrays.toString(tmp[]));
 
@@ -41,3 +42,4 @@ public class Game extends JPanel implements ActionListener {
     }
 
 }
+*/
