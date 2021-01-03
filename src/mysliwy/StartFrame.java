@@ -1,3 +1,4 @@
+package mysliwy;
 
 import java.awt.*;
 import javax.swing.*;

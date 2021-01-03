@@ -1,4 +1,4 @@
-package com.company;
+package mysliwy;
 
 public class MapConfig {
     public String[][] matrix;
