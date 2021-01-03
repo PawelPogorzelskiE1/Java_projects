@@ -1,17 +1,14 @@
 package mysliwy;
 
+import java.util.Arrays;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 public class Game extends JPanel implements ActionListener {
 
-    MapConfig temporary
+    MapConfig tmp = MapParsing.LevelRead("Config1");
     private Dimension m;
     private final Font smallFont = new Font("Arial", Font.BOLD, 14);
     private boolean wGrze = false;
@@ -35,7 +32,9 @@ public class Game extends JPanel implements ActionListener {
     private int pacman_x, pacman_y, pacmand_x, pacmand_y;
     private int req_dx, req_dy;
 
-    private final short levelData[] = // tu wjeżdza mapka z Map Parsing
+    private final MapConfig levelData = tmp[]; // tu wjeżdza mapka z Map Parsing
+
+   System.out.println(Arrays.toString(tmp[]));
 
     public void actionPerformed(ActionEvent e) {
     //code that reacts to the action...
