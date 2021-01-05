@@ -16,18 +16,18 @@ public class Game extends JPanel implements ActionListener {
 
     public Game() {
 
-        MapConfig tmp = MapParsing.LevelRead("Config1.txt");
+        //MapConfig tmp = MapParsing.LevelRead("Config1.txt");
         String levelData[][] = Global.aktualnyPoziom.matrix;
-        int N_BLOCKS = levelData.length;
-        System.out.println(Arrays.deepToString(levelData));
-        System.out.println(N_BLOCKS);
-
+        //System.out.println(Arrays.deepToString(levelData));
+        //System.out.println(Global.iloscWierszy);
+        //System.out.println(Global.iloscKolumn);
     }
 
-     int BLOCK_SIZE = 24;
-     int SCREEN_SIZE = N_BLOCKS * BLOCK_SIZE;
-     int MAX_GHOSTS = 12;
-     int PACMAN_SPEED = 6;
+    int BLOCK_SIZE = 24;
+    int SCREEN_SIZE_Y = Global.iloscWierszy * BLOCK_SIZE;
+    int SCREEN_SIZE_X = Global.iloscKolumn * BLOCK_SIZE;
+    int MAX_GHOSTS = 12;
+    int PACMAN_SPEED = 6;
 
     private int N_GHOSTS = 6;
     private int lives, score;
