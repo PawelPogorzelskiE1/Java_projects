@@ -19,7 +19,7 @@ import java.util.Scanner; // Import the Scanner class to read text files
 
 public class MapParsing {
     public static MapConfig LevelRead(String filename) {
-        MapConfig Overall=new MapConfig();
+        MapConfig Overall = new MapConfig();
         try {
             File myMap = new File(filename);
             Scanner myLine = new Scanner(myMap);
@@ -41,7 +41,7 @@ public class MapParsing {
             for (int i = 0; i < 3; i++) {
                 result.params[i] = Integer.valueOf(parts[i]);
             }
-            Overall=result;
+            Overall = result;
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();

@@ -9,5 +9,5 @@ public class Global {
     public static int ilePoziomow; //liczba poziomow wybranych przez uzytkownika
     public static int poziomTrudnosci; //(przyjm wartosci 1,2,3)
     public static int iloscDostepnychPoziomow; //(poziomy musza byc w oddzielnym folderze, program sprawdzi ilosc plikow by zadecydowac ile bedzie maxs poziomow)
-
+    public static MapConfig aktualnyPoziom = MapParsing.LevelRead("Config1.txt");
 }
