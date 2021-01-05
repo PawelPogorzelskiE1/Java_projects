@@ -14,7 +14,7 @@ public class UstawieniaFrame extends JFrame implements ActionListener {
     JTextArea fieldIlosclvlUstawienia = new JTextArea();
 
     public UstawieniaFrame() {
-        super("Pomoc");
+        super("Ustawienia");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
         setSize(300, 500);
@@ -73,23 +73,23 @@ public class UstawieniaFrame extends JFrame implements ActionListener {
             System.out.println("Witaj na polowaniu Stary Wygo");
             Global.poziomTrudnosci=3;
         }
-        else if(evt.getSource()==IlosclvlButton)
-        {
-            String tmp=fieldIlosclvlUstawienia.getText();
-            Global.ilePoziomow=Integer.valueOf(tmp);
-            if(Global.ilePoziomow > Global.iloscDostepnychPoziomow)
-            {
-                System.out.println("Wybrano wiecej poziomow niz jest dostepne.\n Wybierz mniejsza liczbe poziomow.");
-                Global.ilePoziomow=1;
+        else if(evt.getSource()==IlosclvlButton) {
+            try {
+                String tmp = fieldIlosclvlUstawienia.getText();
+                    Global.ilePoziomow = Integer.valueOf(tmp);
+                    if (Global.ilePoziomow > Global.iloscDostepnychPoziomow) {
+                        System.out.println("Wybrano wiecej poziomow niz jest dostepne.\n Wybierz mniejsza liczbe poziomow.");
+                        Global.ilePoziomow = 1;
+                    } else if (Global.ilePoziomow < 1) {
+                        System.out.println("Wybierz co najmniej jeden poziom.");
+                        Global.ilePoziomow = 1;
+                    } else {
+                        System.out.println("Wybrano " + tmp + " poziomow.\n Rozpocznij lowy!");
+                    }
             }
-            else if(Global.ilePoziomow < 1)
+            catch (java.lang.NumberFormatException e)
             {
-                System.out.println("Wybierz co najmniej jeden poziom.");
-                Global.ilePoziomow=1;
-            }
-            else
-            {
-                System.out.println("Wybrano " + tmp + " poziomow.\n Rozpocznij lowy!");
+                System.out.println("Nie wpisano liczby poziomow.");
             }
         }
     }

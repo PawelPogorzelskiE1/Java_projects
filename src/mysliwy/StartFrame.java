@@ -57,6 +57,7 @@ public class StartFrame extends JFrame implements ActionListener
         }
         else if (evt.getSource()==TabelaWynikowButton)
         {
+            new TabelaWynikowFrame("leaderboard.txt");
             System.out.println("2 przycisk");
         }
         else if (evt.getSource()==UstawieniaButton)

@@ -7,7 +7,7 @@ public class Test_game {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Game();
+                new StartFrame();
             }
         });
     }
