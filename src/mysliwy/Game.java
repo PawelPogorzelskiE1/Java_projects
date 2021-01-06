@@ -1,5 +1,5 @@
 package mysliwy;
-import java.util.Scanner;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -513,7 +513,6 @@ private int ScalingHud(Dimension size)
         req_dx = 0;		// reset direction controls
         req_dy = 0;
         smierc = false;
-
     }
 
 
