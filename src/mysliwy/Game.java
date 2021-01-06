@@ -1,5 +1,5 @@
 package mysliwy;
-
+import java.util.Scanner;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,8 +39,8 @@ public class Game extends JPanel implements ActionListener {
     private int pacman_x, pacman_y, pacmand_x, pacmand_y;
     private int req_dx, req_dy;
 
-    private final int validSpeeds[] = {1, 1, 2, 3, 1, 1, 2, 1};
-    private final int maxSpeed = 6;
+    private final int validSpeeds[] = {1, 1, 2, 2, 1, 1, 2, 1};
+    private final int maxSpeed = 4;
 
     private int currentSpeed = 3;
     private String screenData[];
@@ -137,8 +137,8 @@ private int ScalingHud(Dimension size)
     private void showIntroScreen(Graphics2D g2d) {
 
         String start = "Press SPACE to start";
-        g2d.setColor(Color.yellow);
-        g2d.drawString(start, (SCREEN_SIZE_X)/4, 150);
+        g2d.setColor(Color.black);
+        g2d.drawString(start, (SCREEN_SIZE_X)/3, 400);
     }
 
     private void drawScore(Graphics2D g) {
@@ -307,12 +307,7 @@ private int ScalingHud(Dimension size)
                            ghost_dy[i] = -ghost_dy[i];
 
                         }
-                    //}
-                    //else
-                    //{
-                    //    ghost_dx[i] = -ghost_dx[i];
-                    //    ghost_dy[i] = -ghost_dy[i];
-                    //}
+
 
                 } else {
 
@@ -406,11 +401,25 @@ private int ScalingHud(Dimension size)
         //PRÓBA ŁADOWANIA NASTĘPNYCH POZIOMÓW
         if (iloscbip[2] == 0){
             wGrze=false;
-            if(Global.Dany_Poziom<Global.iloscDostepnychPoziomow) {
-                Global.Dany_Poziom = +1;
+            Global.wynikKoncowy=Global.wynikKoncowy+score;
+            if(Global.Dany_Poziom<Global.ilePoziomow) {
+                Global.Dany_Poziom++;
+                Global.aktualnyPoziom = MapParsing.LevelRead("./MapsFolder/Config"+Global.Dany_Poziom+".txt");
+                Global.iloscWierszy = Global.aktualnyPoziom.matrix[0].length;
+                Global.iloscKolumn = Global.aktualnyPoziom.matrix.length;
+                Test_game pac = new Test_game("./MapsFolder/Config"+Global.Dany_Poziom+".txt");
+                pac.setVisible(true);
+                pac.setTitle("Pacman");
+                pac.setSize(1600,1200);
+                pac.setLocationRelativeTo(null);
+            }
+            else {
+                String tmp = Global.wynikKoncowy+"   "+Global.imie;
+                new SortowanieWynikow(tmp, "leaderboard.txt");
+                }
             }
         }
-    }
+
 
     private void drawPacman(Graphics2D g2d) {
 
