@@ -13,7 +13,7 @@ import java.util.Scanner; // Import the Scanner class to read text files
     s p s s s p s
     s p p p p p s
     s s s s s s s
-    3 (ilość porzeczek) 5 (ilość borówek) 2 (ilość mysliwych)
+    3 (ilość porzeczek) 5 (ilość borówek) 8 (suma porzeczek i borówek)
  */
 
 

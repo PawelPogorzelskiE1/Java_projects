@@ -24,7 +24,7 @@ public class Game extends JPanel implements ActionListener {
     int SCREEN_SIZE_Y = Global.iloscWierszy * BLOCK_SIZE;
     int SCREEN_SIZE_X = Global.iloscKolumn * BLOCK_SIZE;
     int MAX_GHOSTS = 8;
-    int PACMAN_SPEED = 1;
+    int PACMAN_SPEED = 4;
 
     private int N_GHOSTS = 6;
     private int zycia, score;
@@ -39,7 +39,7 @@ public class Game extends JPanel implements ActionListener {
     private int pacman_x, pacman_y, pacmand_x, pacmand_y;
     private int req_dx, req_dy;
 
-    private final int validSpeeds[] = {1, 2, 3, 1, 2, 3, 1, 2};
+    private final int validSpeeds[] = {1, 1, 2, 3, 1, 1, 2, 1};
     private final int maxSpeed = 6;
 
     private int currentSpeed = 3;
@@ -47,13 +47,15 @@ public class Game extends JPanel implements ActionListener {
     private Timer timer;
 
     public String[] levelData = new String[Global.iloscWierszy * Global.iloscKolumn];
-
+    public int[] iloscbip = new int[3];
 
     public Game(String configfilename) {
        // getSize(Game);
         MapConfig tmp = MapParsing.LevelRead(configfilename);
-        tmp.matrix = Global.aktualnyPoziom.matrix;
 
+        for(int i =0; i < 3; i++ ){
+            iloscbip[i]=tmp.params[i];
+        }
         for(int i =0; i < Global.iloscKolumn; i++ ){
             for (int j=0; j < Global.iloscWierszy; j++ ){
 
@@ -202,10 +204,10 @@ private int ScalingHud(Dimension size)
 
         for (int i = 0; i < N_GHOSTS; i++) {
             if (ghost_x[i] % BLOCK_SIZE == 0 && ghost_y[i] % BLOCK_SIZE == 0) {
-                pos = ghost_x[i] / BLOCK_SIZE + Global.iloscKolumn * (ghost_y[i] / BLOCK_SIZE);
+                pos = ghost_x[i] / BLOCK_SIZE + Global.iloscKolumn * (int) (ghost_y[i] / BLOCK_SIZE);
 
                 count = 0;
-                    if ((!screenData[pos--].equals("s")) && ghost_dx[i] != 1) {
+                    if ((!screenData[pos-1].equals("s")) && ghost_dx[i] != 1) {
                         dx[count] = -1;
                         dy[count] = 0;
                         count++;
@@ -217,7 +219,7 @@ private int ScalingHud(Dimension size)
                     count++;
                 }
 
-                if ((!screenData[pos++].equals("s")) && ghost_dx[i] != -1) {
+                if ((!screenData[pos+1].equals("s")) && ghost_dx[i] != -1) {
                     dx[count] = 1;
                     dy[count] = 0;
                     count++;
@@ -297,7 +299,7 @@ private int ScalingHud(Dimension size)
                 if (count == 0) {
                     //if(pos>Global.iloscKolumn && pos<(Global.iloscKolumn-1)*Global.iloscWierszy && pos%Global.iloscKolumn!=Global.iloscKolumn-1 && pos%Global.iloscKolumn!=1)
                     //{
-                        if ((screenData[pos--].equals("s") && screenData[pos++].equals("s") && screenData[pos-Global.iloscKolumn].equals("s") && screenData[pos+Global.iloscKolumn].equals("s"))) {
+                        if ((screenData[pos-1].equals("s") && screenData[pos+1].equals("s") && screenData[pos-Global.iloscKolumn].equals("s") && screenData[pos+Global.iloscKolumn].equals("s"))) {
                             ghost_dx[i] = 0;
                             ghost_dy[i] = 0;
                         } else {
@@ -355,12 +357,16 @@ private int ScalingHud(Dimension size)
             if (screenData[pos].equals("b")) {
                 screenData[pos] = "o";
                 score++;
+                iloscbip[2]=iloscbip[2]-1;
+
             }
 
             if (screenData[pos].equals("p")) {
                 screenData[pos] = "o";
                 score+=20;
                 //TUTAJ WSTAW DZWIEK PORZECZKI.MP3
+                iloscbip[2]=iloscbip[2]-1;
+
             }
 
             /*if (req_dx != 0 || req_dy != 0) {
@@ -374,8 +380,8 @@ private int ScalingHud(Dimension size)
 
             }*/
             if (req_dx != 0 || req_dy != 0) {
-                if ((req_dx == -1 && req_dy == 0 && !(screenData[pos--].equals("s")))
-                        || (req_dx == 1 && req_dy == 0 && !(screenData[pos++].equals("s")))
+                if ((req_dx == -1 && req_dy == 0 && !(screenData[pos-1].equals("s")))
+                        || (req_dx == 1 && req_dy == 0 && !(screenData[pos+1].equals("s")))
                         || (req_dx == 0 && req_dy == -1 && !(screenData[pos-Global.iloscKolumn].equals("s")))
                         || (req_dx == 0 && req_dy == 1 && !(screenData[pos+Global.iloscKolumn].equals("s")))) {
                     pacmand_x = req_dx;
@@ -385,8 +391,8 @@ private int ScalingHud(Dimension size)
             }
 
             // Sprawdzanie czy stoi ( ͡° ͜ʖ ͡°)
-            if ((pacmand_x == -1 && pacmand_y == 0 && (screenData[pos--].equals("s")))
-                    || (pacmand_x == 1 && pacmand_y == 0 && (screenData[pos++].equals("s")))
+            if ((pacmand_x == -1 && pacmand_y == 0 && (screenData[pos-1].equals("s")))
+                    || (pacmand_x == 1 && pacmand_y == 0 && (screenData[pos+1].equals("s")))
                     || (pacmand_x == 0 && pacmand_y == -1 && (screenData[pos-Global.iloscKolumn].equals("s")))
                     || (pacmand_x == 0 && pacmand_y == 1 && (screenData[pos+Global.iloscKolumn].equals("s")))) {
                 pacmand_x = 0;
@@ -397,6 +403,13 @@ private int ScalingHud(Dimension size)
         //pacman_y = pacman_y + PACMAN_SPEED * pacmand_y;
         pacman_x = pacman_x + PACMAN_SPEED * pacmand_x;
         pacman_y = pacman_y + PACMAN_SPEED * pacmand_y;
+        //PRÓBA ŁADOWANIA NASTĘPNYCH POZIOMÓW
+        if (iloscbip[2] == 0){
+            wGrze=false;
+            if(Global.Dany_Poziom<Global.iloscDostepnychPoziomow) {
+                Global.Dany_Poziom = +1;
+            }
+        }
     }
 
     private void drawPacman(Graphics2D g2d) {
@@ -449,7 +462,7 @@ private int ScalingHud(Dimension size)
         zycia = 3;
         score = 0;
         initLevel();
-        N_GHOSTS = 6;
+        N_GHOSTS = 5;
         currentSpeed = 3;
     }
 
@@ -491,6 +504,7 @@ private int ScalingHud(Dimension size)
         req_dx = 0;		// reset direction controls
         req_dy = 0;
         smierc = false;
+
     }
 
 
