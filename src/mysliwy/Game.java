@@ -32,11 +32,12 @@ public class Game extends JPanel implements ActionListener {
 
     private Image heart, ghost;
     private Image up, down, left, right;
+    private Image porzeczka;
 
     private int pacman_x, pacman_y, pacmand_x, pacmand_y;
     private int req_dx, req_dy;
 
-    private final int validSpeeds[] = {1, 2, 3, 4, 6, 8};
+    private final int validSpeeds[] = {1, 2, 3, 1, 2, 3, 1, 2};
     private final int maxSpeed = 6;
 
     private int currentSpeed = 3;
@@ -46,9 +47,9 @@ public class Game extends JPanel implements ActionListener {
     public String[] levelData = new String[Global.iloscWierszy * Global.iloscKolumn];
 
 
-    public Game() {
+    public Game(String configfilename) {
 
-        MapConfig tmp = MapParsing.LevelRead("Config1.txt");
+        MapConfig tmp = MapParsing.LevelRead(configfilename);
         tmp.matrix = Global.aktualnyPoziom.matrix;
 
         for(int i =0; i < Global.iloscKolumn; i++ ){
@@ -73,6 +74,8 @@ public class Game extends JPanel implements ActionListener {
         left = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125242585_2858133591135898_532305311143949365_n.png").getImage();
         right = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125242585_2858133591135898_532305311143949365_n.png").getImage();
         ghost = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125370900_393514468496811_6055932180037584593_n.png").getImage();
+        //borowka = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125345269_445091456646538_8868544866404905378_n.png").getImage();
+        porzeczka = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125325145_359204815372327_7130634727906490634_n.png").getImage();
         heart = new ImageIcon("C:/Users/Paweł/IdeaProjects/proze20z_pogorzelski_przydatek/pixel-heart-2779422_960_720.png").getImage();
 
     }
@@ -180,34 +183,99 @@ public class Game extends JPanel implements ActionListener {
                 pos = ghost_x[i] / BLOCK_SIZE + Global.iloscKolumn * (ghost_y[i] / BLOCK_SIZE);
 
                 count = 0;
-                    if ((screenData[pos-1] =="s") && ghost_dx[i] == -1) {
-                        dx[count] = 1;
+                    if ((!screenData[pos--].equals("s")) && ghost_dx[i] != 1) {
+                        dx[count] = -1;
                         dy[count] = 0;
                         count++;
                     }
 
-                if ((screenData[pos-Global.iloscKolumn] == "s") && ghost_dy[i] == -1) {
-                    dx[count] = 1;
-                    dy[count] = 0;
-                    count++;
-                }
-
-                if ((screenData[pos+1] == "s") && ghost_dx[i] == 1) {
+                if ((!screenData[pos-Global.iloscKolumn].equals("s")) && ghost_dy[i] != 1) {
                     dx[count] = 0;
                     dy[count] = -1;
                     count++;
                 }
 
-                if ((screenData[pos+Global.iloscKolumn] == "s") && ghost_dy[i] == 1) {
-                    dx[count] = -1;
+                if ((!screenData[pos++].equals("s")) && ghost_dx[i] != -1) {
+                    dx[count] = 1;
                     dy[count] = 0;
                     count++;
                 }
 
+                if ((!screenData[pos+Global.iloscKolumn].equals("s")) && ghost_dy[i] != -1) {
+                    dx[count] = 0;
+                    dy[count] = 1;
+                    count++;
+                }
+                /*
+                int[] zakazy=new int[4];
+                for(int k=0; k<4; k++)
+                    zakazy[k]=k;
+
+                if ((screenData[pos--].equals("s")) && ghost_dx[i] == -1) {
+                    dx[count] = -1;
+                    dy[count] = 0;
+                    count++;
+                    zakazy[0]=5;
+                }
+
+                if ((screenData[pos-Global.iloscKolumn].equals("s")) && ghost_dy[i] == -1) {
+                    dx[count] = 0;
+                    dy[count] = -1;
+                    count++;
+                    zakazy[1]=5;
+                }
+
+                if ((screenData[pos++].equals("s")) && ghost_dx[i] == 1) {
+                    dx[count] = 1;
+                    dy[count] = 0;
+                    count++;
+                    zakazy[2]=5;
+                }
+
+                if ((screenData[pos+Global.iloscKolumn].equals("s")) && ghost_dy[i] == 11) {
+                    dx[count] = 0;
+                    dy[count] = 1;
+                    count++;
+                    zakazy[3]=5;
+                }
+                while(true)
+                {
+                    int random = (int) (Math.random() * 3);
+                    int tmp = zakazy[random];
+                    if(tmp==0)
+                    {
+                       dx[count] = 0;
+                       dy[count] = 1;
+                       break;
+                    }
+                    else if(tmp==1)
+                    {
+                        dx[count] = 0;
+                        dy[count] = 1;
+                        break;
+                    }
+                    else if(tmp==2)
+                    {
+                        dx[count] = 0;
+                        dy[count] = -1;
+                        break;
+                    }
+                    else if(tmp==3)
+                    {
+                        dx[count] = 0;
+                        dy[count] = 1;
+                        break;
+                    }
+                }
+*/
+
+
+
+
                 if (count == 0) {
                     //if(pos>Global.iloscKolumn && pos<(Global.iloscKolumn-1)*Global.iloscWierszy && pos%Global.iloscKolumn!=Global.iloscKolumn-1 && pos%Global.iloscKolumn!=1)
                     //{
-                        if (screenData[pos-1] == "s" && screenData[pos+1] == "s" && screenData[pos-Global.iloscKolumn] == "s" && screenData[pos+Global.iloscKolumn] == "s") {
+                        if ((screenData[pos--].equals("s") && screenData[pos++].equals("s") && screenData[pos-Global.iloscKolumn].equals("s") && screenData[pos+Global.iloscKolumn].equals("s"))) {
                             ghost_dx[i] = 0;
                             ghost_dy[i] = 0;
                         } else {
@@ -340,8 +408,13 @@ public class Game extends JPanel implements ActionListener {
                 }
 
                 if ((screenData[i].equals("b"))) {
-                    g2d.setColor(new Color(255,255,255));
+                    g2d.setColor(new Color(210, 20, 20));
                     g2d.fillOval(x + 10, y + 10, 6, 6);
+                }
+                if ((screenData[i].equals("p"))) {
+                    //g2d.setColor(new Color(255,255,255));
+                    //g2d.fillOval(x + 10, y + 10, 6, 6);
+                    g2d.drawImage(porzeczka, x, y, this);
                 }
                 i++;
             }
@@ -353,7 +426,7 @@ public class Game extends JPanel implements ActionListener {
         zycia = 3;
         score = 0;
         initLevel();
-        N_GHOSTS = 2;
+        N_GHOSTS = 6;
         currentSpeed = 3;
     }
 
@@ -374,8 +447,8 @@ public class Game extends JPanel implements ActionListener {
 
         for (int i = 0; i < N_GHOSTS; i++) {
 
-            ghost_y[i] = 4 * BLOCK_SIZE; //start position
-            ghost_x[i] = 4 * BLOCK_SIZE;
+            ghost_y[i] = 10 * BLOCK_SIZE; //start position
+            ghost_x[i] = 6 * BLOCK_SIZE;
             ghost_dy[i] = 0;
             ghost_dx[i] = dx;
             dx = -dx;
