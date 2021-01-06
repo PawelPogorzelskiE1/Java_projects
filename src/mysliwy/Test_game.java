@@ -1,14 +1,23 @@
 package mysliwy;
 
-import java.awt.*;
+import javax.swing.JFrame;
 
-public class Test_game {
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new StartFrame();
-            }
-        });
+public class Test_game extends JFrame{
+
+    public Test_game() {
+        add(new Game());
     }
+
+
+    public static void main(String[] args) {
+
+        Test_game pac = new Test_game();
+        pac.setVisible(true);
+        pac.setTitle("Pacman");
+        pac.setSize(380,420);
+        pac.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        pac.setLocationRelativeTo(null);
+
+    }
+
 }
