@@ -1,5 +1,7 @@
 package mysliwy;
 
+import java.awt.*;
+
 public class Global {
 
     // stałe
@@ -13,4 +15,5 @@ public class Global {
     public static int iloscWierszy = aktualnyPoziom.matrix[0].length;
     public static int iloscKolumn = aktualnyPoziom.matrix.length;
     public static int iloscRekordowTabWynikow = 10;
+    public static int scalar=3;
 }

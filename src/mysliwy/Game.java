@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.util.stream.Stream;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -19,7 +20,7 @@ public class Game extends JPanel implements ActionListener {
     private boolean smierc = false;
 
 
-    int BLOCK_SIZE = 16;
+    int BLOCK_SIZE = 16*Global.scalar;
     int SCREEN_SIZE_Y = Global.iloscWierszy * BLOCK_SIZE;
     int SCREEN_SIZE_X = Global.iloscKolumn * BLOCK_SIZE;
     int MAX_GHOSTS = 8;
@@ -30,9 +31,10 @@ public class Game extends JPanel implements ActionListener {
     private int[] dx, dy;
     private int[] ghost_x, ghost_y, ghost_dx, ghost_dy, ghostSpeed;
 
-    private Image heart, ghost;
+    private Image heart,ghost;
+    //private ImageIcon ghost;
     private Image up, down, left, right;
-    private Image porzeczka;
+    private Image porzeczka, borowka;
 
     private int pacman_x, pacman_y, pacmand_x, pacmand_y;
     private int req_dx, req_dy;
@@ -48,7 +50,7 @@ public class Game extends JPanel implements ActionListener {
 
 
     public Game(String configfilename) {
-
+       // getSize(Game);
         MapConfig tmp = MapParsing.LevelRead(configfilename);
         tmp.matrix = Global.aktualnyPoziom.matrix;
 
@@ -69,16 +71,36 @@ public class Game extends JPanel implements ActionListener {
 
 
     private void loadImages() {
-        down = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125242585_2858133591135898_532305311143949365_n.png").getImage();
-        up = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125242585_2858133591135898_532305311143949365_n.png").getImage();
-        left = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125242585_2858133591135898_532305311143949365_n.png").getImage();
-        right = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125242585_2858133591135898_532305311143949365_n.png").getImage();
-        ghost = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125370900_393514468496811_6055932180037584593_n.png").getImage();
-        //borowka = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125345269_445091456646538_8868544866404905378_n.png").getImage();
-        porzeczka = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125325145_359204815372327_7130634727906490634_n.png").getImage();
-        heart = new ImageIcon("C:/Users/Paweł/IdeaProjects/proze20z_pogorzelski_przydatek/pixel-heart-2779422_960_720.png").getImage();
+        down = new ImageIcon("./ImageFolder/125242585_2858133591135898_532305311143949365_n.png").getImage();
+        up = new ImageIcon("./ImageFolder/125242585_2858133591135898_532305311143949365_n.png").getImage();
+        left = new ImageIcon("./ImageFolder/125242585_2858133591135898_532305311143949365_n.png").getImage();
+        right = new ImageIcon("./ImageFolder/125242585_2858133591135898_532305311143949365_n.png").getImage();
+        //ghost = new ImageIcon("./ImageFolder/125370900_393514468496811_6055932180037584593_n.png").getImage();
+        ghost = new ImageIcon("./ImageFolder/125370900_393514468496811_6055932180037584593_n.png").getImage();
+        borowka = new ImageIcon("./ImageFolder/125345269_445091456646538_8868544866404905378_n.png").getImage();
+        porzeczka = new ImageIcon("./ImageFolder/125325145_359204815372327_7130634727906490634_n.png").getImage();
+        heart = new ImageIcon("./ImageFolder/pixel-heart-2779422_960_720.png").getImage();
 
     }
+
+    private Image getScaledImage(Image srcImg, int w, int h){
+        BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = resizedImg.createGraphics();
+
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(srcImg, 0, 0, w, h, null);
+        g2.dispose();
+
+        return resizedImg;
+    }
+/*
+private int ScalingHud(Dimension size)
+{
+    return Math.min(size.height/(BLOCK_SIZE*Global.iloscWierszy),size.width/(BLOCK_SIZE*Global.iloscKolumn));
+}*/
+
+
+
     private void initVariables() {
 
         screenData = new String[Global.iloscKolumn * Global.iloscWierszy];
@@ -124,7 +146,7 @@ public class Game extends JPanel implements ActionListener {
         g.drawString(s, SCREEN_SIZE_X / 2 + 96, SCREEN_SIZE_Y + 16);
 
         for (int i = 0; i < zycia; i++) {
-            g.drawImage(heart, i * 28 + 8, SCREEN_SIZE_Y + 1, this);
+            g.drawImage(getScaledImage(heart,BLOCK_SIZE,BLOCK_SIZE), i * 28 + 8, SCREEN_SIZE_Y + 1, this);
         }
     }
 
@@ -318,7 +340,7 @@ public class Game extends JPanel implements ActionListener {
     }
 
     private void drawGhost(Graphics2D g2d, int x, int y) {
-        g2d.drawImage(ghost, x, y, this);
+        g2d.drawImage(getScaledImage(ghost,BLOCK_SIZE,BLOCK_SIZE), x, y, this);
     }
 
     private void movePacman() {
@@ -380,13 +402,13 @@ public class Game extends JPanel implements ActionListener {
     private void drawPacman(Graphics2D g2d) {
 
         if (req_dx == -1) {
-            g2d.drawImage(left, pacman_x + 1, pacman_y + 1, this);
+            g2d.drawImage(getScaledImage(left,BLOCK_SIZE,BLOCK_SIZE), pacman_x + 1, pacman_y + 1, this);
         } else if (req_dx == 1) {
-            g2d.drawImage(right, pacman_x + 1, pacman_y + 1, this);
+            g2d.drawImage(getScaledImage(right,BLOCK_SIZE,BLOCK_SIZE), pacman_x + 1, pacman_y + 1, this);
         } else if (req_dy == -1) {
-            g2d.drawImage(up, pacman_x + 1, pacman_y + 1, this);
+            g2d.drawImage(getScaledImage(up,BLOCK_SIZE,BLOCK_SIZE), pacman_x + 1, pacman_y + 1, this);
         } else {
-            g2d.drawImage(down, pacman_x + 1, pacman_y + 1, this);
+            g2d.drawImage(getScaledImage(down,BLOCK_SIZE,BLOCK_SIZE), pacman_x + 1, pacman_y + 1, this);
         }
     }
 
@@ -408,13 +430,14 @@ public class Game extends JPanel implements ActionListener {
                 }
 
                 if ((screenData[i].equals("b"))) {
-                    g2d.setColor(new Color(210, 20, 20));
-                    g2d.fillOval(x + 10, y + 10, 6, 6);
+                    //g2d.setColor(new Color(210, 20, 20));
+                    //g2d.fillOval(x + 10, y + 10, (int)(BLOCK_SIZE/2), (int)(BLOCK_SIZE/2));
+                    g2d.drawImage(getScaledImage(borowka,(int)(BLOCK_SIZE/2),(int)(BLOCK_SIZE/2)), x, y, this);
                 }
                 if ((screenData[i].equals("p"))) {
                     //g2d.setColor(new Color(255,255,255));
                     //g2d.fillOval(x + 10, y + 10, 6, 6);
-                    g2d.drawImage(porzeczka, x, y, this);
+                    g2d.drawImage(getScaledImage(porzeczka,BLOCK_SIZE,BLOCK_SIZE), x, y, this);
                 }
                 i++;
             }
@@ -476,8 +499,9 @@ public class Game extends JPanel implements ActionListener {
 
         Graphics2D g2d = (Graphics2D)g;
 
-        g2d.setColor(Color.black);
-        g2d.fillRect(1600, 1600, m.width, m.height);
+        g2d.setColor(Color.white);
+        g2d.fillRect(0, 0, m.width, m.height);
+
 
         drawMaze(g2d);
         drawScore(g2d);

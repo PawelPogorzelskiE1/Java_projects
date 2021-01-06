@@ -53,15 +53,16 @@ public class StartFrame extends JFrame implements ActionListener
     {
         if (evt.getSource()==NowaGraButton)
         {
-            for(int integer=1;integer<Global.iloscDostepnychPoziomow+1;integer++)
+            for(int integer=1;integer<2;integer++)//<Global.iloscDostepnychPoziomow+1
             {
-                Test_game pac = new Test_game("Config"+integer+".txt");
+                Test_game pac = new Test_game("./MapsFolder/Config"+integer+".txt");
                 pac.setVisible(true);
                 pac.setTitle("Pacman");
                 pac.setSize(1600,1200);
                 pac.setDefaultCloseOperation(EXIT_ON_CLOSE);
                 pac.setLocationRelativeTo(null);
                 System.out.println("1 przycisk");
+
             }
 
 
