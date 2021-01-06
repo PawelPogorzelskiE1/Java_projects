@@ -12,6 +12,8 @@ public class UstawieniaFrame extends JFrame implements ActionListener {
     JButton TrudnyUstawieniaButton = new JButton("Stary Wyga");
     JButton IlosclvlButton = new JButton("Zatwierdz");
     JTextArea fieldIlosclvlUstawienia = new JTextArea();
+    JButton IloscRekordowWTablicyWynikowButton = new JButton("Zatwierdz");
+    JTextArea fieldIloscRekordowWTablicyWynikow = new JTextArea();
 
     public UstawieniaFrame() {
         super("Ustawienia");
@@ -53,6 +55,17 @@ public class UstawieniaFrame extends JFrame implements ActionListener {
         IlosclvlButton.setBounds(50, 290, 200, 40);
         IlosclvlButton.addActionListener( this);
         panel.add(IlosclvlButton);
+
+        JLabel tekstIloscRekordowWTablicyWynikow = new JLabel("Wpisz ilość rekordow do wyswietlenia");
+        tekstIloscRekordowWTablicyWynikow.setBounds(40, 340, 240, 20);
+        panel.add(tekstIloscRekordowWTablicyWynikow);
+
+        fieldIloscRekordowWTablicyWynikow.setBounds(40, 370, 240, 20);
+        panel.add(fieldIloscRekordowWTablicyWynikow);
+
+        IloscRekordowWTablicyWynikowButton.setBounds(50, 410, 200, 40);
+        IloscRekordowWTablicyWynikowButton.addActionListener( this);
+        panel.add(IloscRekordowWTablicyWynikowButton);
     }
     public void actionPerformed(ActionEvent evt)
     {
@@ -90,6 +103,23 @@ public class UstawieniaFrame extends JFrame implements ActionListener {
             catch (java.lang.NumberFormatException e)
             {
                 System.out.println("Nie wpisano liczby poziomow.");
+            }
+        }
+        else if(evt.getSource()==IloscRekordowWTablicyWynikowButton)
+        {
+            try {
+                String tmp = fieldIloscRekordowWTablicyWynikow.getText();
+                Global.iloscRekordowTabWynikow = Integer.valueOf(tmp);
+                if (Global.iloscRekordowTabWynikow < 1) {
+                    System.out.println("Wybierz co najmniej jeden rekord do wyswietlenia.");
+                    Global.ilePoziomow = 1;
+                } else {
+                    System.out.println("Wybrano " + tmp + " rekordow.");
+                }
+            }
+            catch (java.lang.NumberFormatException e)
+            {
+                System.out.println("Nie wpisano liczby rekordow.");
             }
         }
     }

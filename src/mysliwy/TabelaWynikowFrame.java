@@ -25,11 +25,11 @@ public class TabelaWynikowFrame  extends JFrame implements ActionListener {
             panel.add(wstep);
             int integer=1;
 
-            for(int i=1; i<11; i++) //while(tmp!="koniec")
+            for(int i=1; i<Global.iloscRekordowTabWynikow+1; i++) //while(tmp!="koniec")
             {
                 tmp = myLine.nextLine();
                 JLabel wynik = new JLabel("Miejsce " + i + ": " + tmp);
-                wynik.setBounds(40, 10+integer*35, 240, 20);
+                wynik.setBounds(40, 10+integer*400/Global.iloscRekordowTabWynikow, 240, 20);
                 panel.add(wynik);
 
                 integer++;
@@ -45,6 +45,13 @@ public class TabelaWynikowFrame  extends JFrame implements ActionListener {
         {
             System.out.println("An error occurred. TabelaWynikowFrame.java");
             e.printStackTrace();
+        }
+        catch(java.util.NoSuchElementException e)
+        {
+            System.out.println("blabla");
+            //e.printStackTrace();
+            Global.iloscRekordowTabWynikow--;
+            new TabelaWynikowFrame(leaderboardTXT);
         }
 
 

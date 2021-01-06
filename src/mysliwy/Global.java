@@ -12,4 +12,5 @@ public class Global {
     public static MapConfig aktualnyPoziom = MapParsing.LevelRead("Config1.txt");
     public static int iloscWierszy = aktualnyPoziom.matrix.length;
     public static int iloscKolumn = aktualnyPoziom.matrix[0].length;
+    public static int iloscRekordowTabWynikow = 10;
 }
