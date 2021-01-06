@@ -14,7 +14,7 @@ public class Test_game extends JFrame{
         Test_game pac = new Test_game();
         pac.setVisible(true);
         pac.setTitle("Pacman");
-        pac.setSize(380,420);
+        pac.setSize(1600,1200);
         pac.setDefaultCloseOperation(EXIT_ON_CLOSE);
         pac.setLocationRelativeTo(null);
 

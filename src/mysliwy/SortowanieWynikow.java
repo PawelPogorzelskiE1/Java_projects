@@ -9,7 +9,7 @@ public class SortowanieWynikow {
     public SortowanieWynikow(String nowyWynik, String leaderboardTXT)
     {
         try {
-            String ZbiorWynikow[];
+            String ZbiorWynikow[] = new String[Global.iloscRekordowTabWynikow+1];
             File leaderboard = new File(leaderboardTXT);
             Scanner myLine = new Scanner(leaderboard);
             String tmp;

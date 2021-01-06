@@ -176,13 +176,13 @@ public class Game extends JPanel implements ActionListener {
                 pos = ghost_x[i] / BLOCK_SIZE + Global.iloscKolumn * (int) (ghost_y[i] / BLOCK_SIZE);
 
                 count = 0;
-
+                if(pos>0)
                 if ((screenData[pos-1] !="s") && ghost_dx[i] != 1) {
                     dx[count] = -1;
                     dy[count] = 0;
                     count++;
                 }
-
+                if (pos>Global.iloscKolumn)
                 if ((screenData[pos-Global.iloscKolumn] != "s") && ghost_dy[i] != 1) {
                     dx[count] = 0;
                     dy[count] = -1;
@@ -202,13 +202,15 @@ public class Game extends JPanel implements ActionListener {
                 }
 
                 if (count == 0) {
-
-                    if (screenData[pos-1] == "s" && screenData[pos+1] == "s" && screenData[pos-Global.iloscKolumn] == "s" && screenData[pos-Global.iloscKolumn] == "s") {
-                        ghost_dx[i] = 0;
-                        ghost_dy[i] = 0;
-                    } else {
-                        ghost_dx[i] = -ghost_dx[i];
-                        ghost_dy[i] = -ghost_dy[i];
+                    if(pos>Global.iloscKolumn && pos<(Global.iloscKolumn-1)*Global.iloscWierszy && pos%Global.iloscKolumn!=Global.iloscKolumn-1 && pos%Global.iloscKolumn!=1)
+                    {
+                        if (screenData[pos-1] == "s" && screenData[pos+1] == "s" && screenData[pos-Global.iloscKolumn] == "s" && screenData[pos-Global.iloscKolumn] == "s") {
+                            ghost_dx[i] = 0;
+                            ghost_dy[i] = 0;
+                        } else {
+                            ghost_dx[i] = -ghost_dx[i];
+                            ghost_dy[i] = -ghost_dy[i];
+                        }
                     }
 
                 } else {
@@ -248,7 +250,7 @@ public class Game extends JPanel implements ActionListener {
 
 
         if (pacman_x % BLOCK_SIZE == 0 && pacman_y % BLOCK_SIZE == 0) {
-            pos = pacman_x / BLOCK_SIZE + Global.iloscKolumn * (int) (pacman_y / BLOCK_SIZE);
+            pos = pacman_x / BLOCK_SIZE + Global.iloscKolumn * (pacman_y / BLOCK_SIZE);
 
 
             if (screenData[pos] == "b") {
@@ -312,20 +314,20 @@ public class Game extends JPanel implements ActionListener {
                 if ((levelData[i] == "s")) {
                     g2d.fillRect(x, y, BLOCK_SIZE, BLOCK_SIZE);
                 }
-
+                if(i>1)
                 if ((screenData[i-1] == "s")) {
                     g2d.drawLine(x, y, x, y + BLOCK_SIZE - 1);
                 }
-
+                if(i<(Global.iloscKolumn-1)*Global.iloscWierszy)
                 if ((screenData[i+Global.iloscKolumn] == "s")) {
                     g2d.drawLine(x, y, x + BLOCK_SIZE - 1, y);
                 }
-
+                if(i<(Global.iloscWierszy * Global.iloscKolumn)-1)
                 if ((screenData[i+1] == "s")) {
                     g2d.drawLine(x + BLOCK_SIZE - 1, y, x + BLOCK_SIZE - 1,
                             y + BLOCK_SIZE - 1);
                 }
-
+                if(i>Global.iloscKolumn)
                 if ((screenData[i-Global.iloscKolumn] == "s")) {
                     g2d.drawLine(x, y + BLOCK_SIZE - 1, x + BLOCK_SIZE - 1,
                             y + BLOCK_SIZE - 1);
