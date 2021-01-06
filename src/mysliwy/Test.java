@@ -7,7 +7,6 @@ public class Test {
             @Override
             public void run() {
                 new StartFrame();
-                System.out.println(Global.aktualnyPoziom.matrix[0][2]);
             }
 
         });
