@@ -23,7 +23,7 @@ public class Game extends JPanel implements ActionListener {
     int SCREEN_SIZE_Y = Global.iloscWierszy * BLOCK_SIZE;
     int SCREEN_SIZE_X = Global.iloscKolumn * BLOCK_SIZE;
     int MAX_GHOSTS = 8;
-    int PACMAN_SPEED = 6;
+    int PACMAN_SPEED = 1;
 
     private int N_GHOSTS = 6;
     private int zycia, score;
@@ -45,15 +45,16 @@ public class Game extends JPanel implements ActionListener {
 
     public String[] levelData = new String[Global.iloscWierszy * Global.iloscKolumn];
 
+
     public Game() {
 
         MapConfig tmp = MapParsing.LevelRead("Config1.txt");
         tmp.matrix = Global.aktualnyPoziom.matrix;
 
-        for(int i =0; i < Global.iloscWierszy; i++ ){
-            for (int j=0; j < Global.iloscKolumn; j++ ){
+        for(int i =0; i < Global.iloscKolumn; i++ ){
+            for (int j=0; j < Global.iloscWierszy; j++ ){
 
-                levelData[j]=Global.aktualnyPoziom.matrix[i][j];
+                levelData[i+Global.iloscKolumn*j]=Global.aktualnyPoziom.matrix[i][j];
 
             }
         }
@@ -67,11 +68,11 @@ public class Game extends JPanel implements ActionListener {
 
 
     private void loadImages() {
-        down = new ImageIcon("C:/Users/Paweł/IdeaProjects/proze20z_pogorzelski_przydatek/125242585_2858133591135898_532305311143949365_n.png").getImage();
-        up = new ImageIcon("C:/Users/Paweł/IdeaProjects/proze20z_pogorzelski_przydatek/125242585_2858133591135898_532305311143949365_n.png").getImage();
-        left = new ImageIcon("C:/Users/Paweł/IdeaProjects/proze20z_pogorzelski_przydatek/125242585_2858133591135898_532305311143949365_n.png").getImage();
-        right = new ImageIcon("C:/Users/Paweł/IdeaProjects/proze20z_pogorzelski_przydatek/125242585_2858133591135898_532305311143949365_n.png").getImage();
-        ghost = new ImageIcon("C:/Users/Paweł/IdeaProjects/proze20z_pogorzelski_przydatek/125370900_393514468496811_6055932180037584593_n.png").getImage();
+        down = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125242585_2858133591135898_532305311143949365_n.png").getImage();
+        up = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125242585_2858133591135898_532305311143949365_n.png").getImage();
+        left = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125242585_2858133591135898_532305311143949365_n.png").getImage();
+        right = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125242585_2858133591135898_532305311143949365_n.png").getImage();
+        ghost = new ImageIcon("C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/125370900_393514468496811_6055932180037584593_n.png").getImage();
         heart = new ImageIcon("C:/Users/Paweł/IdeaProjects/proze20z_pogorzelski_przydatek/pixel-heart-2779422_960_720.png").getImage();
 
     }
@@ -171,47 +172,55 @@ public class Game extends JPanel implements ActionListener {
         int pos;
         int count;
 
+        //for (int i=0; i<Global.iloscWierszy*Global.iloscKolumn;i++)
+        //    System.out.println(screenData[i]);
+
         for (int i = 0; i < N_GHOSTS; i++) {
             if (ghost_x[i] % BLOCK_SIZE == 0 && ghost_y[i] % BLOCK_SIZE == 0) {
-                pos = ghost_x[i] / BLOCK_SIZE + Global.iloscKolumn * (int) (ghost_y[i] / BLOCK_SIZE);
+                pos = ghost_x[i] / BLOCK_SIZE + Global.iloscKolumn * (ghost_y[i] / BLOCK_SIZE);
 
                 count = 0;
-                if(pos>0)
-                if ((screenData[pos-1] !="s") && ghost_dx[i] != 1) {
-                    dx[count] = -1;
-                    dy[count] = 0;
-                    count++;
-                }
-                if (pos>Global.iloscKolumn)
-                if ((screenData[pos-Global.iloscKolumn] != "s") && ghost_dy[i] != 1) {
-                    dx[count] = 0;
-                    dy[count] = -1;
-                    count++;
-                }
+                    if ((screenData[pos-1] =="s") && ghost_dx[i] == -1) {
+                        dx[count] = 1;
+                        dy[count] = 0;
+                        count++;
+                    }
 
-                if ((screenData[pos+1] != "s") && ghost_dx[i] != -1) {
+                if ((screenData[pos-Global.iloscKolumn] == "s") && ghost_dy[i] == -1) {
                     dx[count] = 1;
                     dy[count] = 0;
                     count++;
                 }
 
-                if ((screenData[pos+Global.iloscKolumn] != "s") && ghost_dy[i] != -1) {
+                if ((screenData[pos+1] == "s") && ghost_dx[i] == 1) {
                     dx[count] = 0;
-                    dy[count] = 1;
+                    dy[count] = -1;
+                    count++;
+                }
+
+                if ((screenData[pos+Global.iloscKolumn] == "s") && ghost_dy[i] == 1) {
+                    dx[count] = -1;
+                    dy[count] = 0;
                     count++;
                 }
 
                 if (count == 0) {
-                    if(pos>Global.iloscKolumn && pos<(Global.iloscKolumn-1)*Global.iloscWierszy && pos%Global.iloscKolumn!=Global.iloscKolumn-1 && pos%Global.iloscKolumn!=1)
-                    {
-                        if (screenData[pos-1] == "s" && screenData[pos+1] == "s" && screenData[pos-Global.iloscKolumn] == "s" && screenData[pos-Global.iloscKolumn] == "s") {
+                    //if(pos>Global.iloscKolumn && pos<(Global.iloscKolumn-1)*Global.iloscWierszy && pos%Global.iloscKolumn!=Global.iloscKolumn-1 && pos%Global.iloscKolumn!=1)
+                    //{
+                        if (screenData[pos-1] == "s" && screenData[pos+1] == "s" && screenData[pos-Global.iloscKolumn] == "s" && screenData[pos+Global.iloscKolumn] == "s") {
                             ghost_dx[i] = 0;
                             ghost_dy[i] = 0;
                         } else {
-                            ghost_dx[i] = -ghost_dx[i];
-                            ghost_dy[i] = -ghost_dy[i];
+                           ghost_dx[i] = -ghost_dx[i];
+                           ghost_dy[i] = -ghost_dy[i];
+
                         }
-                    }
+                    //}
+                    //else
+                    //{
+                    //    ghost_dx[i] = -ghost_dx[i];
+                    //    ghost_dy[i] = -ghost_dy[i];
+                    //}
 
                 } else {
 
@@ -253,36 +262,49 @@ public class Game extends JPanel implements ActionListener {
             pos = pacman_x / BLOCK_SIZE + Global.iloscKolumn * (pacman_y / BLOCK_SIZE);
 
 
-            if (screenData[pos] == "b") {
+            if (screenData[pos].equals("b")) {
                 screenData[pos] = "o";
                 score++;
             }
 
-            if (screenData[pos] == "p") {
+            if (screenData[pos].equals("p")) {
                 screenData[pos] = "o";
                 score+=20;
                 //TUTAJ WSTAW DZWIEK PORZECZKI.MP3
             }
 
-            if (req_dx != 0 || req_dy != 0) {
-                if (!((req_dx == -1 && req_dy == 0 && (screenData[pos--] != "s"))
-                        || (req_dx == 1 && req_dy == 0 && (screenData[pos++] != "s"))
-                        || (req_dx == 0 && req_dy == -1 && (screenData[pos-Global.iloscKolumn] != "s"))
-                        || (req_dx == 0 && req_dy == 1 && (screenData[pos+Global.iloscKolumn] != "s")))) {
+            /*if (req_dx != 0 || req_dy != 0) {
+                if (!((req_dx == -1 && req_dy == 0 && (screenData[pos--].equals("s")))
+                        || (req_dx == 1 && req_dy == 0 && (screenData[pos++].equals("s")))
+                        || (req_dx == 0 && req_dy == -1 && (screenData[pos-Global.iloscKolumn].equals("s")))
+                        || (req_dx == 0 && req_dy == 1 && (screenData[pos+Global.iloscKolumn].equals("s"))))) {
                     pacmand_x = req_dx;
                     pacmand_y = req_dy;
                 }
+
+            }*/
+            if (req_dx != 0 || req_dy != 0) {
+                if ((req_dx == -1 && req_dy == 0 && !(screenData[pos--].equals("s")))
+                        || (req_dx == 1 && req_dy == 0 && !(screenData[pos++].equals("s")))
+                        || (req_dx == 0 && req_dy == -1 && !(screenData[pos-Global.iloscKolumn].equals("s")))
+                        || (req_dx == 0 && req_dy == 1 && !(screenData[pos+Global.iloscKolumn].equals("s")))) {
+                    pacmand_x = req_dx;
+                    pacmand_y = req_dy;
+                }
+
             }
 
             // Sprawdzanie czy stoi ( ͡° ͜ʖ ͡°)
-            if ((pacmand_x == -1 && pacmand_y == 0 && (screenData[pos--] != "s"))
-                    || (pacmand_x == 1 && pacmand_y == 0 && (screenData[pos++] != "s"))
-                    || (pacmand_x == 0 && pacmand_y == -1 && (screenData[pos-Global.iloscKolumn] != "s"))
-                    || (pacmand_x == 0 && pacmand_y == 1 && (screenData[pos+Global.iloscKolumn] != "s"))) {
+            if ((pacmand_x == -1 && pacmand_y == 0 && (screenData[pos--].equals("s")))
+                    || (pacmand_x == 1 && pacmand_y == 0 && (screenData[pos++].equals("s")))
+                    || (pacmand_x == 0 && pacmand_y == -1 && (screenData[pos-Global.iloscKolumn].equals("s")))
+                    || (pacmand_x == 0 && pacmand_y == 1 && (screenData[pos+Global.iloscKolumn].equals("s")))) {
                 pacmand_x = 0;
                 pacmand_y = 0;
             }
         }
+        //pacman_x = pacman_x + PACMAN_SPEED * pacmand_x;
+        //pacman_y = pacman_y + PACMAN_SPEED * pacmand_y;
         pacman_x = pacman_x + PACMAN_SPEED * pacmand_x;
         pacman_y = pacman_y + PACMAN_SPEED * pacmand_y;
     }
@@ -301,43 +323,26 @@ public class Game extends JPanel implements ActionListener {
     }
 
     private void drawMaze(Graphics2D g2d) {
-
         int i = 0;
         int x, y;
-
         for (y = 0; y < SCREEN_SIZE_Y; y += BLOCK_SIZE) {
             for (x = 0; x < SCREEN_SIZE_X; x += BLOCK_SIZE) {
 
-                g2d.setColor(new Color(0,72,251));
+                g2d.setColor(new Color(0,250,70));
                 g2d.setStroke(new BasicStroke(5));
 
-                if ((levelData[i] == "s")) {
+                if (levelData[i].equals("s")) {
+                    g2d.fillRect(x, y, BLOCK_SIZE, BLOCK_SIZE);
+
+                }
+                if ((screenData[i].equals("s"))) {
                     g2d.fillRect(x, y, BLOCK_SIZE, BLOCK_SIZE);
                 }
-                if(i>1)
-                if ((screenData[i-1] == "s")) {
-                    g2d.drawLine(x, y, x, y + BLOCK_SIZE - 1);
-                }
-                if(i<(Global.iloscKolumn-1)*Global.iloscWierszy)
-                if ((screenData[i+Global.iloscKolumn] == "s")) {
-                    g2d.drawLine(x, y, x + BLOCK_SIZE - 1, y);
-                }
-                if(i<(Global.iloscWierszy * Global.iloscKolumn)-1)
-                if ((screenData[i+1] == "s")) {
-                    g2d.drawLine(x + BLOCK_SIZE - 1, y, x + BLOCK_SIZE - 1,
-                            y + BLOCK_SIZE - 1);
-                }
-                if(i>Global.iloscKolumn)
-                if ((screenData[i-Global.iloscKolumn] == "s")) {
-                    g2d.drawLine(x, y + BLOCK_SIZE - 1, x + BLOCK_SIZE - 1,
-                            y + BLOCK_SIZE - 1);
-                }
 
-                if ((screenData[i] == "b")) {
+                if ((screenData[i].equals("b"))) {
                     g2d.setColor(new Color(255,255,255));
                     g2d.fillOval(x + 10, y + 10, 6, 6);
                 }
-
                 i++;
             }
         }
@@ -348,14 +353,14 @@ public class Game extends JPanel implements ActionListener {
         zycia = 3;
         score = 0;
         initLevel();
-        N_GHOSTS = 6;
+        N_GHOSTS = 2;
         currentSpeed = 3;
     }
 
     private void initLevel() {
         int i;
 
-            for (i = 0; i < levelData.length; i++) {
+            for (i = 0; i < Global.iloscWierszy*Global.iloscKolumn; i++) {
                 screenData[i] = levelData[i];
             }
 
@@ -383,8 +388,8 @@ public class Game extends JPanel implements ActionListener {
             ghostSpeed[i] = validSpeeds[random];
         }
 
-        pacman_x = 7 * BLOCK_SIZE;  //start position
-        pacman_y = 11 * BLOCK_SIZE;
+        pacman_x = 3 * BLOCK_SIZE;  //start position
+        pacman_y = 3 * BLOCK_SIZE;
         pacmand_x = 0;	//reset direction move
         pacmand_y = 0;
         req_dx = 0;		// reset direction controls
@@ -396,10 +401,10 @@ public class Game extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        Graphics2D g2d = (Graphics2D) g;
+        Graphics2D g2d = (Graphics2D)g;
 
         g2d.setColor(Color.black);
-        g2d.fillRect(0, 0, m.width, m.height);
+        g2d.fillRect(1600, 1600, m.width, m.height);
 
         drawMaze(g2d);
         drawScore(g2d);

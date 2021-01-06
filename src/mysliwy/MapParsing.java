@@ -33,7 +33,6 @@ public class MapParsing {
                 parts = tmp.split(" ");
                 for (int j = 0; j < x; j++) {
                     result.matrix[j][i] = parts[j];
-
                 }
             }
             tmp = myLine.nextLine();
@@ -46,7 +45,7 @@ public class MapParsing {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        System.out.println(Overall);
+
         return Overall;
     }
 }
