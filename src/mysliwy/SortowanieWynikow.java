@@ -6,7 +6,9 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-
+/**
+ * klasa SortowanieWyników() obsługuje wczytywanie nowego wyniku do pliku z tabelą wyników oraz sortuje ją względem najlepszego wyniku.
+ */
 public class SortowanieWynikow {
     public SortowanieWynikow(String nowyWynik, String leaderboardTXT)
     {

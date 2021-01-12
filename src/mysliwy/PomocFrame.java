@@ -12,7 +12,9 @@ import java.awt.image.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-
+/**
+ * klasa PomocFrame() opisuje Sposób rysowania i obsługi panelu z Pomocą - opis zasad gry i poruszania się
+ */
 public class PomocFrame extends JFrame implements ActionListener{
     public PomocFrame(){
         super("Pomoc");
