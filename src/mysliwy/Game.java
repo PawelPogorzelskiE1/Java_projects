@@ -50,11 +50,13 @@ public class Game extends JPanel implements ActionListener {
 
     public String[] levelData = new String[Global.iloscWierszy * Global.iloscKolumn];
     public int[] iloscbip = new int[3];
+    Test_game pac;
     /**
      * klasa Game() opisuje sposób tłumaczenia danych z tablicy otrzymanej przy parsowaniu na tablicę jednowymiarową wymaganą
      * do poprawnego ładowania poziomów.
      */
     public Game(String configfilename) {
+
        // getSize(Game);
         MapConfig tmp = MapParsing.LevelRead(configfilename);
 
@@ -440,7 +442,8 @@ private int ScalingHud(Dimension size)
                 Global.aktualnyPoziom = MapParsing.LevelRead("./MapsFolder/Config"+Global.Dany_Poziom+".txt");
                 Global.iloscWierszy = Global.aktualnyPoziom.matrix[0].length;
                 Global.iloscKolumn = Global.aktualnyPoziom.matrix.length;
-                Test_game pac = new Test_game("./MapsFolder/Config"+Global.Dany_Poziom+".txt");
+
+                pac = new Test_game("./MapsFolder/Config"+Global.Dany_Poziom+".txt");
                 pac.setVisible(true);
                 pac.setTitle("Pacman");
                 pac.setSize(1600,1200);
