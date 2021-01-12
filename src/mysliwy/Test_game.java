@@ -1,6 +1,6 @@
 package mysliwy;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class Test_game extends JFrame{
 

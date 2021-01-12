@@ -48,7 +48,7 @@ public class TabelaWynikowFrame  extends JFrame implements ActionListener {
         }
         catch(java.util.NoSuchElementException e)
         {
-            System.out.println("blabla");
+            System.out.println("BrakElementuDoWyswietleniaNaTabeli");
             //e.printStackTrace();
             Global.iloscRekordowTabWynikow--;
             new TabelaWynikowFrame(leaderboardTXT);

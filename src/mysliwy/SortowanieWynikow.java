@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 public class SortowanieWynikow {
     public SortowanieWynikow(String nowyWynik, String leaderboardTXT)
     {
+        int tymczasowailoscrekordow=Global.iloscRekordowTabWynikow;
         try {
             String ZbiorWynikow[] = new String[Global.iloscRekordowTabWynikow+1];
             File leaderboard = new File(leaderboardTXT);
@@ -34,20 +35,22 @@ public class SortowanieWynikow {
             PrintWriter zapis = new PrintWriter(leaderboardTXT);
             for(int i=0; i<Global.iloscRekordowTabWynikow+1;i++)
             {
-                zapis.println(ZbiorWynikow[i]+"\n");
+//                zapis.println(ZbiorWynikow[i]+"\n");
+                zapis.println(ZbiorWynikow[i]);
             }
             zapis.close();
-
+            new TabelaWynikowFrame(leaderboardTXT);
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
         catch(java.util.NoSuchElementException e)
         {
-            System.out.println("blabla");
+            System.out.println("ProblemWSortowniWynikow");
             //e.printStackTrace();
             Global.iloscRekordowTabWynikow--;
-            new TabelaWynikowFrame(leaderboardTXT);
+//            new TabelaWynikowFrame(leaderboardTXT);
+            new SortowanieWynikow(nowyWynik, leaderboardTXT);
         }
 
     }

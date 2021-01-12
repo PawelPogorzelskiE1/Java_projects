@@ -26,7 +26,7 @@ public class Game extends JPanel implements ActionListener {
     int MAX_GHOSTS = 8;
     int PACMAN_SPEED = 8;
 
-    private int N_GHOSTS = 6;
+    private int N_GHOSTS = 2*Global.poziomTrudnosci;
     private int zycia, score;
     private int[] dx, dy;
     private int[] ghost_x, ghost_y, ghost_dx, ghost_dy, ghostSpeed;
@@ -39,7 +39,7 @@ public class Game extends JPanel implements ActionListener {
     private int pacman_x, pacman_y, pacmand_x, pacmand_y;
     private int req_dx, req_dy;
 
-    private final int validSpeeds[] = {1, 1, 2, 2, 1, 1, 2, 1};
+    private final int validSpeeds[] = {1, 2, 2, 1, 2, 1, 2, 1};
     private final int maxSpeed = 4;
 
     private int currentSpeed = 3;
@@ -416,7 +416,7 @@ private int ScalingHud(Dimension size)
                 pac.setLocationRelativeTo(null);
             }
             else {
-                String tmp = Global.wynikKoncowy+"   "+Global.imie;
+                String tmp = Global.wynikKoncowy*Global.poziomTrudnosci+"   "+Global.imie;
                 new SortowanieWynikow(tmp, "leaderboard.txt");
                 }
             }
@@ -473,7 +473,7 @@ private int ScalingHud(Dimension size)
         zycia = 3;
         score = 0;
         initLevel();
-        N_GHOSTS = 5;
+        //N_GHOSTS = 5;
         currentSpeed = 3;
     }
 
@@ -505,6 +505,7 @@ private int ScalingHud(Dimension size)
                 random = currentSpeed;
             }
 
+            //ghostSpeed[i] = validSpeeds[random];
             ghostSpeed[i] = validSpeeds[random];
         }
 
