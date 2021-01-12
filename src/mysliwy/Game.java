@@ -24,7 +24,7 @@ public class Game extends JPanel implements ActionListener {
     int SCREEN_SIZE_Y = Global.iloscWierszy * BLOCK_SIZE;
     int SCREEN_SIZE_X = Global.iloscKolumn * BLOCK_SIZE;
     int MAX_GHOSTS = 8;
-    int PACMAN_SPEED = 4;
+    int PACMAN_SPEED = 8;
 
     private int N_GHOSTS = 6;
     private int zycia, score;
@@ -403,7 +403,9 @@ private int ScalingHud(Dimension size)
             wGrze=false;
             Global.wynikKoncowy=Global.wynikKoncowy+score;
             if(Global.Dany_Poziom<Global.ilePoziomow) {
+                System.out.println(Global.Dany_Poziom);
                 Global.Dany_Poziom++;
+                System.out.println(Global.Dany_Poziom);
                 Global.aktualnyPoziom = MapParsing.LevelRead("./MapsFolder/Config"+Global.Dany_Poziom+".txt");
                 Global.iloscWierszy = Global.aktualnyPoziom.matrix[0].length;
                 Global.iloscKolumn = Global.aktualnyPoziom.matrix.length;
