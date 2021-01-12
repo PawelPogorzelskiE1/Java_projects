@@ -16,7 +16,10 @@ import java.util.Scanner; // Import the Scanner class to read text files
     3 (ilość porzeczek) 5 (ilość borówek) 8 (suma porzeczek i borówek)
  */
 
-
+/**
+ * klasa MapParsing() obsługuje wczytywanie danych konfiguracyjnych z plików konfiguracyjnych
+ * wymaga podania nazwy pliku otrzymywanego z innej klasy.
+ */
 public class MapParsing {
     public static MapConfig LevelRead(String filename) {
         MapConfig Overall = new MapConfig();
