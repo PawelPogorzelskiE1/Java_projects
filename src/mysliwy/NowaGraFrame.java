@@ -42,5 +42,6 @@ public class NowaGraFrame extends JFrame implements ActionListener {
             pac.setSize(1600,1200);
             pac.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             pac.setLocationRelativeTo(null);
+
     }
 }

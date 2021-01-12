@@ -41,14 +41,14 @@ public class SortowanieWynikow {
                 zapis.println(ZbiorWynikow[i]);
             }
             zapis.close();
-            new TabelaWynikowFrame(leaderboardTXT);
+ //           new TabelaWynikowFrame(leaderboardTXT);
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
         catch(java.util.NoSuchElementException e)
         {
-            System.out.println("ProblemWSortowniWynikow");
+            System.out.println("ZmniejszenieIlosciSortowanychWynikow w SortowanieWynikow");
             //e.printStackTrace();
             Global.iloscRekordowTabWynikow--;
 //            new TabelaWynikowFrame(leaderboardTXT);

@@ -108,11 +108,6 @@ public class Game extends JPanel implements ActionListener {
 
         return resizedImg;
     }
-/*
-private int ScalingHud(Dimension size)
-{
-    return Math.min(size.height/(BLOCK_SIZE*Global.iloscWierszy),size.width/(BLOCK_SIZE*Global.iloscKolumn));
-}*/
 
     /**
      * klasa initVariables() opisuje początkowe ustawienie ważnych zmiennych.
@@ -191,18 +186,7 @@ private int ScalingHud(Dimension size)
         }
 
         if (finished) {
-
             score += 50;
-            //TO DODAĆ DO POZIOMU TRUDNOŚCI - PO PRZEJSCIU POZIOMU POJAWIA SIĘ NASTĘPNY Z TRUDNIEJSZĄ MAPĄ
-            /*
-            if (N_GHOSTS < MAX_GHOSTS) {
-                N_GHOSTS++;
-            }
-
-            if (currentSpeed < maxSpeed) {
-                currentSpeed++;
-            }
-*/
             initLevel();
         }
     }
@@ -215,9 +199,15 @@ private int ScalingHud(Dimension size)
 
         if (zycia == 0) {
             wGrze = false;
+            String tmp = Global.wynikKoncowy+"   "+Global.imie;
+            new SortowanieWynikow(tmp, "leaderboard.txt");
+            new KomunikatKoniecGry("leaderboard.txt");
+        }
+        else {
+            continueLevel();
         }
 
-        continueLevel();
+
     }
     /**
      * klasa moveGhosts(Graphics2D g2d) opisuje poruszanie się duchów, warunki określające gdzie mogą się ruszać.
@@ -226,9 +216,6 @@ private int ScalingHud(Dimension size)
 
         int pos;
         int count;
-
-        //for (int i=0; i<Global.iloscWierszy*Global.iloscKolumn;i++)
-        //    System.out.println(screenData[i]);
 
         for (int i = 0; i < N_GHOSTS; i++) {
             if (ghost_x[i] % BLOCK_SIZE == 0 && ghost_y[i] % BLOCK_SIZE == 0) {
@@ -258,75 +245,7 @@ private int ScalingHud(Dimension size)
                     dy[count] = 1;
                     count++;
                 }
-                /*
-                int[] zakazy=new int[4];
-                for(int k=0; k<4; k++)
-                    zakazy[k]=k;
-
-                if ((screenData[pos--].equals("s")) && ghost_dx[i] == -1) {
-                    dx[count] = -1;
-                    dy[count] = 0;
-                    count++;
-                    zakazy[0]=5;
-                }
-
-                if ((screenData[pos-Global.iloscKolumn].equals("s")) && ghost_dy[i] == -1) {
-                    dx[count] = 0;
-                    dy[count] = -1;
-                    count++;
-                    zakazy[1]=5;
-                }
-
-                if ((screenData[pos++].equals("s")) && ghost_dx[i] == 1) {
-                    dx[count] = 1;
-                    dy[count] = 0;
-                    count++;
-                    zakazy[2]=5;
-                }
-
-                if ((screenData[pos+Global.iloscKolumn].equals("s")) && ghost_dy[i] == 11) {
-                    dx[count] = 0;
-                    dy[count] = 1;
-                    count++;
-                    zakazy[3]=5;
-                }
-                while(true)
-                {
-                    int random = (int) (Math.random() * 3);
-                    int tmp = zakazy[random];
-                    if(tmp==0)
-                    {
-                       dx[count] = 0;
-                       dy[count] = 1;
-                       break;
-                    }
-                    else if(tmp==1)
-                    {
-                        dx[count] = 0;
-                        dy[count] = 1;
-                        break;
-                    }
-                    else if(tmp==2)
-                    {
-                        dx[count] = 0;
-                        dy[count] = -1;
-                        break;
-                    }
-                    else if(tmp==3)
-                    {
-                        dx[count] = 0;
-                        dy[count] = 1;
-                        break;
-                    }
-                }
-*/
-
-
-
-
                 if (count == 0) {
-                    //if(pos>Global.iloscKolumn && pos<(Global.iloscKolumn-1)*Global.iloscWierszy && pos%Global.iloscKolumn!=Global.iloscKolumn-1 && pos%Global.iloscKolumn!=1)
-                    //{
                         if ((screenData[pos-1].equals("s") && screenData[pos+1].equals("s") && screenData[pos-Global.iloscKolumn].equals("s") && screenData[pos+Global.iloscKolumn].equals("s"))) {
                             ghost_dx[i] = 0;
                             ghost_dy[i] = 0;
@@ -396,17 +315,6 @@ private int ScalingHud(Dimension size)
                 iloscbip[2]=iloscbip[2]-1;
 
             }
-
-            /*if (req_dx != 0 || req_dy != 0) {
-                if (!((req_dx == -1 && req_dy == 0 && (screenData[pos--].equals("s")))
-                        || (req_dx == 1 && req_dy == 0 && (screenData[pos++].equals("s")))
-                        || (req_dx == 0 && req_dy == -1 && (screenData[pos-Global.iloscKolumn].equals("s")))
-                        || (req_dx == 0 && req_dy == 1 && (screenData[pos+Global.iloscKolumn].equals("s"))))) {
-                    pacmand_x = req_dx;
-                    pacmand_y = req_dy;
-                }
-
-            }*/
             if (req_dx != 0 || req_dy != 0) {
                 if ((req_dx == -1 && req_dy == 0 && !(screenData[pos-1].equals("s")))
                         || (req_dx == 1 && req_dy == 0 && !(screenData[pos+1].equals("s")))
@@ -427,8 +335,6 @@ private int ScalingHud(Dimension size)
                 pacmand_y = 0;
             }
         }
-        //pacman_x = pacman_x + PACMAN_SPEED * pacmand_x;
-        //pacman_y = pacman_y + PACMAN_SPEED * pacmand_y;
         pacman_x = pacman_x + PACMAN_SPEED * pacmand_x;
         pacman_y = pacman_y + PACMAN_SPEED * pacmand_y;
         //PRÓBA ŁADOWANIA NASTĘPNYCH POZIOMÓW
@@ -442,7 +348,7 @@ private int ScalingHud(Dimension size)
                 Global.aktualnyPoziom = MapParsing.LevelRead("./MapsFolder/Config"+Global.Dany_Poziom+".txt");
                 Global.iloscWierszy = Global.aktualnyPoziom.matrix[0].length;
                 Global.iloscKolumn = Global.aktualnyPoziom.matrix.length;
-
+//                pac.setVisible(false);
                 pac = new Test_game("./MapsFolder/Config"+Global.Dany_Poziom+".txt");
                 pac.setVisible(true);
                 pac.setTitle("Pacman");
@@ -450,8 +356,10 @@ private int ScalingHud(Dimension size)
                 pac.setLocationRelativeTo(null);
             }
             else {
-                String tmp = Global.wynikKoncowy*Global.poziomTrudnosci+"   "+Global.imie;
+                Global.wynikKoncowy=(Global.wynikKoncowy+zycia*250)*Global.poziomTrudnosci;
+                String tmp = Global.wynikKoncowy+"   "+Global.imie;
                 new SortowanieWynikow(tmp, "leaderboard.txt");
+                new KomunikatKoniecGry("leaderboard.txt");
                 }
             }
         }
