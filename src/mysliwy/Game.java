@@ -1,5 +1,7 @@
 package mysliwy;
-
+/**
+ * tu umieszczone potrzebne biblioteki
+ */
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,7 +50,10 @@ public class Game extends JPanel implements ActionListener {
 
     public String[] levelData = new String[Global.iloscWierszy * Global.iloscKolumn];
     public int[] iloscbip = new int[3];
-
+    /**
+     * klasa Game() opisuje sposób tłumaczenia danych z tablicy otrzymanej przy parsowaniu na tablicę jednowymiarową wymaganą
+     * do poprawnego ładowania poziomów.
+     */
     public Game(String configfilename) {
        // getSize(Game);
         MapConfig tmp = MapParsing.LevelRead(configfilename);
@@ -71,7 +76,9 @@ public class Game extends JPanel implements ActionListener {
         initGame();
     }
 
-
+    /**
+     * klasa loadImages() opisuje sposób ładowania grafik dla poszczególnych elementów wyświetlanych na ekranie.
+     */
     private void loadImages() {
         down = new ImageIcon("./ImageFolder/125242585_2858133591135898_532305311143949365_n.png").getImage();
         up = new ImageIcon("./ImageFolder/125242585_2858133591135898_532305311143949365_n.png").getImage();
@@ -84,7 +91,11 @@ public class Game extends JPanel implements ActionListener {
         heart = new ImageIcon("./ImageFolder/pixel-heart-2779422_960_720.png").getImage();
 
     }
-
+    /**
+     * klasa getScaledImage() opisuje skalowanie obrazów by mieściły się w blokach wyświetlanych w labiryncie.
+     * przyjmuje obrazy załadowane przez loadImages oraz wartości h- wysokości i w- szerokości żądanej dla przeskalowanego
+     * obrazu.
+     */
     private Image getScaledImage(Image srcImg, int w, int h){
         BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
@@ -101,7 +112,9 @@ private int ScalingHud(Dimension size)
     return Math.min(size.height/(BLOCK_SIZE*Global.iloscWierszy),size.width/(BLOCK_SIZE*Global.iloscKolumn));
 }*/
 
-
+    /**
+     * klasa initVariables() opisuje początkowe ustawienie ważnych zmiennych.
+     */
 
     private void initVariables() {
 
@@ -118,7 +131,9 @@ private int ScalingHud(Dimension size)
         timer = new Timer(40, this);
         timer.start();
     }
-
+    /**
+     * klasa playGame() opisuje zasady działania gry (sprawdzanie czy może się ona toczyć, inicjalizowanie)
+     */
     private void playGame(Graphics2D g2d) {
 
         if (smierc) {
@@ -133,14 +148,19 @@ private int ScalingHud(Dimension size)
             checkMaze();
         }
     }
-
+    /**
+     * klasa showIntroScreen() opisuje w którym miejscu i w jakim formacie wyświetla się na ekranie warunek rozpoczęcia gry
+     * "press SPACE to start"
+     */
     private void showIntroScreen(Graphics2D g2d) {
 
         String start = "Press SPACE to start";
         g2d.setColor(Color.black);
         g2d.drawString(start, (SCREEN_SIZE_X)/3, 400);
     }
-
+    /**
+     * klasa drawScore() opisuje w którym miejscu i w jakim formacie wyświetlać na ekranie aktualną ilość punktów
+     */
     private void drawScore(Graphics2D g) {
         g.setFont(smallFont);
         g.setColor(new Color(5, 181, 79));
@@ -151,7 +171,9 @@ private int ScalingHud(Dimension size)
             g.drawImage(getScaledImage(heart,BLOCK_SIZE,BLOCK_SIZE), i * 28 + 8, SCREEN_SIZE_Y + 1, this);
         }
     }
-
+    /**
+     * klasa checkMaze() opisuje czy gra już się skończyła jeśli tak to dodaje punkty (nie do końca działa)
+     */
     private void checkMaze() {
 
         int i = 0;
@@ -182,7 +204,9 @@ private int ScalingHud(Dimension size)
             initLevel();
         }
     }
-
+    /**
+     * klasa death() opisuje moment smierci w momencie gdy skończą się życia pacmanowi (niedzwiedziowi)
+    */
     private void death() {
 
         zycia--;
@@ -193,7 +217,9 @@ private int ScalingHud(Dimension size)
 
         continueLevel();
     }
-
+    /**
+     * klasa moveGhosts(Graphics2D g2d) opisuje poruszanie się duchów, warunki określające gdzie mogą się ruszać.
+     */
     private void moveGhosts(Graphics2D g2d) {
 
         int pos;
@@ -335,11 +361,16 @@ private int ScalingHud(Dimension size)
             }
         }
     }
-
+    /**
+     * klasa drawGhost() opisuje rysowanie ducha (myśliwego) na mapie w momencie gdy jest na danej pozycji.
+     */
     private void drawGhost(Graphics2D g2d, int x, int y) {
         g2d.drawImage(getScaledImage(ghost,BLOCK_SIZE,BLOCK_SIZE), x, y, this);
     }
-
+    /**
+     * klasa movePacman() opisuje sposób poruszania się pacmana (niedźwiedzia) na mapie oraz warunki gdzie może a gdzie nie się ruszyć.
+     * Sprawdza ona również, czy poziom został skończony oraz, jeśli tak, to ładuje następny poziom.
+     */
     private void movePacman() {
 
         int pos;
@@ -422,7 +453,10 @@ private int ScalingHud(Dimension size)
             }
         }
 
-
+    /**
+     * klasa drawPacman() opisuje rysowanie pacmana (niedzwiedzia) w zależności od tego w którym kierunku się porusza
+     * (jeszcze brak obrazków niedzwiedzia odwróconego w danym kierunku)
+     */
     private void drawPacman(Graphics2D g2d) {
 
         if (req_dx == -1) {
@@ -435,7 +469,9 @@ private int ScalingHud(Dimension size)
             g2d.drawImage(getScaledImage(down,BLOCK_SIZE,BLOCK_SIZE), pacman_x + 1, pacman_y + 1, this);
         }
     }
-
+    /**
+     * klasa drawMaze() opisuje sposób wyrysowywania labiryntu w którym użytkownik się porusza.
+     */
     private void drawMaze(Graphics2D g2d) {
         int i = 0;
         int x, y;
@@ -467,7 +503,9 @@ private int ScalingHud(Dimension size)
             }
         }
     }
-
+    /**
+     * klasa initGame() opisuje startowe wartości życia, wyniku, ilosci duchów (myśliwych) oraz prędkość.
+     */
     private void initGame() {
 
         zycia = 3;
@@ -476,7 +514,10 @@ private int ScalingHud(Dimension size)
         //N_GHOSTS = 5;
         currentSpeed = 3;
     }
-
+    /**
+     * klasa initLevel() opisuje uruchamianie danego poziomu wykorzystując dane ze zmiennych globalnych w których są informacje
+     * o wielkości mapy oraz jej konstrukcji (gdzie ściany, borówki i porzeczki)
+     */
     private void initLevel() {
         int i;
 
@@ -486,7 +527,11 @@ private int ScalingHud(Dimension size)
 
         continueLevel();
     }
-
+    /**
+     * klasa continueLevel() opisuje warunki kontynuowania poziomu. W innej klasie jest wywoływany po sprawdzeniu
+     * czy gra nie jest skończona (śmierć lub koniec poziomu) pozwala na dalsze poruszanie się duchów (myśliwych) oraz
+     * pacmana (niedźwiedzia) na początku rozgrywki ustawia również ich pozycję.
+     */
     private void continueLevel() {
 
         int dx = 1;
@@ -517,7 +562,9 @@ private int ScalingHud(Dimension size)
         req_dy = 0;
         smierc = false;
     }
-
+    /**
+     * klasa paintComponent() opisuje sposób rysowania labiryntu oraz wyniku na ekranie
+     */
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -541,8 +588,10 @@ private int ScalingHud(Dimension size)
         g2d.dispose();
     }
 
+    /**
+     * klasa TAdapter() opisuje nasłuchiwanie na sygnał z klawiatury by program wiedział jak ma się poruszyć pacman (niedźwiedż)
+     */
 
-    //controls
     class TAdapter extends KeyAdapter {
 
         @Override

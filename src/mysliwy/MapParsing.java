@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
 
 
-/* wygląd pliku konfiguracyjnego
+/** wygląd pliku konfiguracyjnego
         x y
     s s s s s s s
     s p p p p p s
