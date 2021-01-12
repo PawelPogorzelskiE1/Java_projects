@@ -403,7 +403,7 @@ public class Game extends JPanel implements ActionListener {
                 if ((screenData[i].equals("b"))) {
                     //g2d.setColor(new Color(210, 20, 20));
                     //g2d.fillOval(x + 10, y + 10, (int)(BLOCK_SIZE/2), (int)(BLOCK_SIZE/2));
-                    g2d.drawImage(getScaledImage(borowka,(int)(BLOCK_SIZE/2),(int)(BLOCK_SIZE/2)), x, y, this);
+                    g2d.drawImage(getScaledImage(borowka,(int)(BLOCK_SIZE),(int)(BLOCK_SIZE)), x, y, this);
                 }
                 if ((screenData[i].equals("p"))) {
                     //g2d.setColor(new Color(255,255,255));
