@@ -23,8 +23,8 @@ public class Game extends JPanel implements ActionListener {
 
 
     int BLOCK_SIZE = 16*Global.scalar;
-    int SCREEN_SIZE_Y = Global.iloscWierszy * BLOCK_SIZE;
-    int SCREEN_SIZE_X = Global.iloscKolumn * BLOCK_SIZE;
+    int SCREEN_SIZE_Y = Global.iloscWierszy;
+    int SCREEN_SIZE_X = Global.iloscKolumn;
     int MAX_GHOSTS = 8;
     int PACMAN_SPEED = 8;
 
@@ -47,7 +47,7 @@ public class Game extends JPanel implements ActionListener {
     private int currentSpeed = 3;
     private String screenData[];
     private Timer timer;
-
+    private final Test_game game;
     public String[] levelData = new String[Global.iloscWierszy * Global.iloscKolumn];
     public int[] iloscbip = new int[3];
     Test_game pac;
@@ -55,8 +55,9 @@ public class Game extends JPanel implements ActionListener {
      * klasa Game() opisuje sposób tłumaczenia danych z tablicy otrzymanej przy parsowaniu na tablicę jednowymiarową wymaganą
      * do poprawnego ładowania poziomów.
      */
-    public Game(String configfilename) {
 
+    public Game(String configfilename, Test_game Game) {
+        game=Game;
        // getSize(Game);
         MapConfig tmp = MapParsing.LevelRead(configfilename);
 
@@ -272,7 +273,7 @@ public class Game extends JPanel implements ActionListener {
 
             ghost_x[i] = ghost_x[i] + (ghost_dx[i] * ghostSpeed[i]);
             ghost_y[i] = ghost_y[i] + (ghost_dy[i] * ghostSpeed[i]);
-            drawGhost(g2d, ghost_x[i] + 1, ghost_y[i] + 1);
+            drawGhost(g2d, (ghost_x[i] + 1), ghost_y[i] + 1);
 
             if (pacman_x > (ghost_x[i] - 8) && pacman_x < (ghost_x[i] + 8)
                     && pacman_y > (ghost_y[i] - 8) && pacman_y < (ghost_y[i] + 8)
@@ -286,7 +287,8 @@ public class Game extends JPanel implements ActionListener {
      * klasa drawGhost() opisuje rysowanie ducha (myśliwego) na mapie w momencie gdy jest na danej pozycji.
      */
     private void drawGhost(Graphics2D g2d, int x, int y) {
-        g2d.drawImage(getScaledImage(ghost,BLOCK_SIZE,BLOCK_SIZE), x, y, this);
+        int minBokProstokatuGry=Math.min((int)(game.getHeight()/Global.iloscWierszy),(int)(game.getWidth()/Global.iloscKolumn));
+        g2d.drawImage(getScaledImage(ghost,BLOCK_SIZE,BLOCK_SIZE), x*minBokProstokatuGry/BLOCK_SIZE, y*minBokProstokatuGry/BLOCK_SIZE,minBokProstokatuGry, minBokProstokatuGry, this);
     }
     /**
      * klasa movePacman() opisuje sposób poruszania się pacmana (niedźwiedzia) na mapie oraz warunki gdzie może a gdzie nie się ruszyć.
@@ -369,46 +371,49 @@ public class Game extends JPanel implements ActionListener {
      * (jeszcze brak obrazków niedzwiedzia odwróconego w danym kierunku)
      */
     private void drawPacman(Graphics2D g2d) {
-
+        int minBokProstokatuGry=Math.min((int)(game.getHeight()/Global.iloscWierszy),(int)(game.getWidth()/Global.iloscKolumn));
         if (req_dx == -1) {
-            g2d.drawImage(getScaledImage(left,BLOCK_SIZE,BLOCK_SIZE), pacman_x + 1, pacman_y + 1, this);
+            g2d.drawImage(getScaledImage(left,BLOCK_SIZE,BLOCK_SIZE), (pacman_x + 1)*minBokProstokatuGry/BLOCK_SIZE, (pacman_y + 1)*minBokProstokatuGry/BLOCK_SIZE,minBokProstokatuGry,minBokProstokatuGry, this);
         } else if (req_dx == 1) {
-            g2d.drawImage(getScaledImage(right,BLOCK_SIZE,BLOCK_SIZE), pacman_x + 1, pacman_y + 1, this);
+            g2d.drawImage(getScaledImage(right,BLOCK_SIZE,BLOCK_SIZE), (pacman_x + 1)*minBokProstokatuGry/BLOCK_SIZE, (pacman_y + 1)*minBokProstokatuGry/BLOCK_SIZE,minBokProstokatuGry,minBokProstokatuGry, this);
         } else if (req_dy == -1) {
-            g2d.drawImage(getScaledImage(up,BLOCK_SIZE,BLOCK_SIZE), pacman_x + 1, pacman_y + 1, this);
+            g2d.drawImage(getScaledImage(up,BLOCK_SIZE,BLOCK_SIZE), (pacman_x + 1)*minBokProstokatuGry/BLOCK_SIZE, (pacman_y + 1)*minBokProstokatuGry/BLOCK_SIZE,minBokProstokatuGry,minBokProstokatuGry, this);
         } else {
-            g2d.drawImage(getScaledImage(down,BLOCK_SIZE,BLOCK_SIZE), pacman_x + 1, pacman_y + 1, this);
+            g2d.drawImage(getScaledImage(down,BLOCK_SIZE,BLOCK_SIZE), (pacman_x + 1)*minBokProstokatuGry/BLOCK_SIZE, (pacman_y + 1)*minBokProstokatuGry/BLOCK_SIZE,minBokProstokatuGry,minBokProstokatuGry, this);
         }
     }
     /**
      * klasa drawMaze() opisuje sposób wyrysowywania labiryntu w którym użytkownik się porusza.
      */
-    private void drawMaze(Graphics2D g2d) {
+    private void drawMaze(Graphics2D g2d, Dimension GameWindow) {
         int i = 0;
         int x, y;
-        for (y = 0; y < SCREEN_SIZE_Y; y += BLOCK_SIZE) {
-            for (x = 0; x < SCREEN_SIZE_X; x += BLOCK_SIZE) {
+        int minBokProstokatuGry=Math.min((int)(game.getHeight()/Global.iloscWierszy),(int)(game.getWidth()/Global.iloscKolumn));
+        for (y = 0; y < SCREEN_SIZE_Y; y += 1) {
+            for (x = 0; x < SCREEN_SIZE_X; x += 1) {
+
+
 
                 g2d.setColor(new Color(0,250,70));
                 g2d.setStroke(new BasicStroke(5));
 
                 if (levelData[i].equals("s")) {
-                    g2d.fillRect(x, y, BLOCK_SIZE, BLOCK_SIZE);
+                    g2d.fillRect(x*minBokProstokatuGry, y*minBokProstokatuGry, minBokProstokatuGry, minBokProstokatuGry);
 
                 }
                 if ((screenData[i].equals("s"))) {
-                    g2d.fillRect(x, y, BLOCK_SIZE, BLOCK_SIZE);
+                    g2d.fillRect(x*minBokProstokatuGry, y*minBokProstokatuGry, minBokProstokatuGry, minBokProstokatuGry);
                 }
 
                 if ((screenData[i].equals("b"))) {
                     //g2d.setColor(new Color(210, 20, 20));
                     //g2d.fillOval(x + 10, y + 10, (int)(BLOCK_SIZE/2), (int)(BLOCK_SIZE/2));
-                    g2d.drawImage(getScaledImage(borowka,(int)(BLOCK_SIZE),(int)(BLOCK_SIZE)), x, y, this);
+                    g2d.drawImage(getScaledImage(borowka,(int)(minBokProstokatuGry),(int)(minBokProstokatuGry)), x*minBokProstokatuGry, y*minBokProstokatuGry,minBokProstokatuGry,minBokProstokatuGry, this);
                 }
                 if ((screenData[i].equals("p"))) {
                     //g2d.setColor(new Color(255,255,255));
                     //g2d.fillOval(x + 10, y + 10, 6, 6);
-                    g2d.drawImage(getScaledImage(porzeczka,BLOCK_SIZE,BLOCK_SIZE), x, y, this);
+                    g2d.drawImage(getScaledImage(porzeczka,minBokProstokatuGry,minBokProstokatuGry), x*minBokProstokatuGry, y*minBokProstokatuGry,minBokProstokatuGry,minBokProstokatuGry, this);
                 }
                 i++;
             }
@@ -486,7 +491,7 @@ public class Game extends JPanel implements ActionListener {
         g2d.fillRect(0, 0, m.width, m.height);
 
 
-        drawMaze(g2d);
+        drawMaze(g2d, Global.WindowSize);
         drawScore(g2d);
 
         if (wGrze) {

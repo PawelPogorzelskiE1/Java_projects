@@ -5,7 +5,7 @@ import javax.swing.*;
 public class Test_game extends JFrame{
 
     public Test_game(String configfilename) {
-        add(new Game(configfilename));
+        add(new Game(configfilename, this));
     }
 
 

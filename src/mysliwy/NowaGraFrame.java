@@ -20,9 +20,9 @@ public class NowaGraFrame extends JFrame implements ActionListener {
         add(panel);
 
 
-        JLabel tekstIloscRekordowWTablicyWynikow = new JLabel("Wpisz ilość rekordow do wyswietlenia");
-        tekstIloscRekordowWTablicyWynikow.setBounds(40,340,240,20);
-        panel.add(tekstIloscRekordowWTablicyWynikow);
+        JLabel tekstImie = new JLabel("Wpisz imie");
+        tekstImie.setBounds(40,340,240,20);
+        panel.add(tekstImie);
 
         fieldWprowadzImie.setBounds(40,240,240,20);
         panel.add(fieldWprowadzImie);
@@ -36,10 +36,12 @@ public class NowaGraFrame extends JFrame implements ActionListener {
     {
             String imie = fieldWprowadzImie.getText();
             Global.imie=imie;
+
             Test_game pac = new Test_game("./MapsFolder/Config"+Global.Dany_Poziom+".txt");
             pac.setVisible(true);
             pac.setTitle("Pacman");
-            pac.setSize(1600,1200);
+            pac.setSize(1600,900);
+            Global.WindowSize=pac.getSize();
             pac.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             pac.setLocationRelativeTo(null);
 
