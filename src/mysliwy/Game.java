@@ -139,11 +139,13 @@ public class Game extends JPanel implements ActionListener {
             death();
 
         } else {
-
-            movePacman();
             drawPacman(g2d);
-            moveGhosts(g2d);
-            checkMaze();
+
+            if(Global.czyPauza==false) {
+                movePacman();
+                moveGhosts(g2d);
+                checkMaze();
+            }
         }
     }
     /**
@@ -440,8 +442,7 @@ public class Game extends JPanel implements ActionListener {
             for (i = 0; i < Global.iloscWierszy*Global.iloscKolumn; i++) {
                 screenData[i] = levelData[i];
             }
-
-        continueLevel();
+            continueLevel();
     }
     /**
      * klasa continueLevel() opisuje warunki kontynuowania poziomu. W innej klasie jest wywoływany po sprawdzeniu
@@ -516,29 +517,36 @@ public class Game extends JPanel implements ActionListener {
             int key = e.getKeyCode();
 
             if (wGrze) {
-                if (key == KeyEvent.VK_LEFT) {
-                    req_dx = -1;
-                    req_dy = 0;
-                } else if (key == KeyEvent.VK_RIGHT) {
-                    req_dx = 1;
-                    req_dy = 0;
-                } else if (key == KeyEvent.VK_UP) {
-                    req_dx = 0;
-                    req_dy = -1;
-                } else if (key == KeyEvent.VK_DOWN) {
-                    req_dx = 0;
-                    req_dy = 1;
-                } else if (key == KeyEvent.VK_ESCAPE && timer.isRunning()) {
-                    wGrze = false;
+
+                if (key == KeyEvent.VK_P) {
+                    if(Global.czyPauza==false)
+                    Global.czyPauza = true;
+                    else
+                        Global.czyPauza=false;
+            }else if (key == KeyEvent.VK_LEFT) {
+                        req_dx = -1;
+                        req_dy = 0;
+                    } else if (key == KeyEvent.VK_RIGHT) {
+                        req_dx = 1;
+                        req_dy = 0;
+                    } else if (key == KeyEvent.VK_UP) {
+                        req_dx = 0;
+                        req_dy = -1;
+                    } else if (key == KeyEvent.VK_DOWN) {
+                        req_dx = 0;
+                        req_dy = 1;
+                    } else if (key == KeyEvent.VK_ESCAPE && timer.isRunning()) {
+                        wGrze = false;
+                    }}
+                else {
+                        if (key == KeyEvent.VK_SPACE) {
+                            wGrze = true;
+                            initGame();
+                        }
+                    }
                 }
-            } else {
-                if (key == KeyEvent.VK_SPACE) {
-                    wGrze = true;
-                    initGame();
-                }
+
             }
-        }
-    }
 
         public void actionPerformed (ActionEvent e){
             repaint();

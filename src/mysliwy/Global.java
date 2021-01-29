@@ -19,4 +19,5 @@ public class Global {
     public static int iloscRekordowTabWynikow = 10;
     public static int scalar=3;
     public static Dimension WindowSize;
+    public static boolean czyPauza=false;
 }
