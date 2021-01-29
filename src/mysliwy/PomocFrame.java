@@ -21,7 +21,7 @@ public class PomocFrame extends JFrame implements ActionListener{
         try {
             JPanel panel = new JPanel();
 
-            String imagePath="C:/Users/Kacper/Desktop/EL4/PROZE/proze20z_pogorzelski_przydatek/src/mysliwy/PomocOpis.png";
+            String imagePath="./src/mysliwy/PomocOpis.png";
             BufferedImage myPicture = ImageIO.read(new File(imagePath));
             JLabel picLabel = new JLabel(new ImageIcon(myPicture));
             add(picLabel);

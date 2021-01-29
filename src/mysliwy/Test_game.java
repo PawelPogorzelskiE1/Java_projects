@@ -8,7 +8,6 @@ public class Test_game extends JFrame{
         add(new Game(configfilename, this));
     }
 
-
     /*public static void main(String[] args) {
 
         //Test_game pac = new Test_game(configfilename);
@@ -19,5 +18,4 @@ public class Test_game extends JFrame{
         pac.setLocationRelativeTo(null);
 
     }*/
-
 }
