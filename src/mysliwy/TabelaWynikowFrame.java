@@ -7,7 +7,9 @@ package mysliwy;
         import java.io.File;
         import java.util.Scanner;
 
-
+/**
+ * klasa TabelaWynikowFrame(String leaderboardTXT) opisuje implementacji obslugi funkcjonalnosci tabeli wynikow.
+ */
 public class TabelaWynikowFrame  extends JFrame implements ActionListener {
     public TabelaWynikowFrame(String leaderboardTXT) {
         super("Tabela Wynikow");

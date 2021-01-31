@@ -5,7 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * klasa NowaGraFrame implementuje obsluge zakonczenia gry.
+ */
 public class KomunikatKoniecGry extends JFrame implements ActionListener {
     JButton WyswietlTabButton = new JButton("WyswietlTabeleWynikow");
     JButton KoniecGryButton = new JButton("Zamknij program");

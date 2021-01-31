@@ -5,7 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * klasa NowaGraFrame opisuje implementacje obsluge interaktywnego menu wprowadzania zadanych ustawien nastepnej rozgrywki.
+ */
 public class UstawieniaFrame extends JFrame implements ActionListener {
     JButton LatwyUstawieniaButton = new JButton("Maly mis");
     JButton SredniUstawieniaButton = new JButton("Niedzwiadek");

@@ -2,6 +2,9 @@ package mysliwy;
 
 import java.awt.*;
 
+/**
+ * klasa Global() opisuje implementacje obslugi zmiennych Globalnych.
+ */
 public class Global {
 
     // stale

@@ -2,6 +2,10 @@ package mysliwy;
 
 import javax.swing.*;
 
+/**
+ * klasa Test_game sluzy poprawnemu testowaniu gry.
+ */
+
 public class Test_game extends JFrame{
 
     public Test_game(String configfilename) {

@@ -5,7 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * klasa NowaGraFrame opisuje implementacje obsluge interaktywnego menu wprowadzania nazwy gracza i rozpoczynania gry.
+ */
 public class NowaGraFrame extends JFrame implements ActionListener {
     JTextArea fieldWprowadzImie = new JTextArea();
     JButton rozpocznijGreButton = new JButton("Rozpocznij gre");
