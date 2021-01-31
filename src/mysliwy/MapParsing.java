@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
 
 
-/** wygląd pliku konfiguracyjnego
+/** wyglad pliku konfiguracyjnego
         x y
     s s s s s s s
     s p p p p p s
@@ -13,11 +13,11 @@ import java.util.Scanner; // Import the Scanner class to read text files
     s p s s s p s
     s p p p p p s
     s s s s s s s
-    3 (ilość porzeczek) 5 (ilość borówek) 8 (suma porzeczek i borówek)
+    3 (ilosc porzeczek) 5 (ilosc borowek) 8 (suma porzeczek i borowek)
  */
 
 /**
- * klasa MapParsing() obsługuje wczytywanie danych konfiguracyjnych z plików konfiguracyjnych
+ * klasa MapParsing() obsluguje wczytywanie danych konfiguracyjnych z plikow konfiguracyjnych
  * wymaga podania nazwy pliku otrzymywanego z innej klasy.
  */
 public class MapParsing {

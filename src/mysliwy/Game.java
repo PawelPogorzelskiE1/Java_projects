@@ -1,3 +1,7 @@
+/**
+ * @auth Kacper Przydatek Pawel Pogorzelski
+ */
+
 package mysliwy;
 /**
  * tu umieszczone potrzebne biblioteki
@@ -52,8 +56,9 @@ public class Game extends JPanel implements ActionListener {
     public int[] iloscbip = new int[3];
     Test_game pac;
     /**
-     * klasa Game() opisuje sposób tłumaczenia danych z tablicy otrzymanej przy parsowaniu na tablicę jednowymiarową wymaganą
-     * do poprawnego ładowania poziomów.
+     * klasa Game() opisuje sposob tlumaczenia danych z tablicy otrzymanej przy parsowaniu na tablice jednowymiarowa wymagana
+     * do poprawnego ladowania poziomow. Odpowiada rowniez za wywolanie wielu kluczowych elementow gry inicjalizacja zmiennych oraz zaladowanie
+     * obrazow.
      */
 
     public Game(String configfilename, Test_game Game) {
@@ -80,7 +85,7 @@ public class Game extends JPanel implements ActionListener {
     }
 
     /**
-     * klasa loadImages() opisuje sposób ładowania grafik dla poszczególnych elementów wyświetlanych na ekranie.
+     * klasa loadImages() opisuje sposob ladowania grafik dla poszczegolnych elementow wyswietlanych na ekranie.
      */
     private void loadImages() {
         down = new ImageIcon("./ImageFolder/125242585_2858133591135898_532305311143949365_n.png").getImage();
@@ -95,8 +100,8 @@ public class Game extends JPanel implements ActionListener {
 
     }
     /**
-     * klasa getScaledImage() opisuje skalowanie obrazów by mieściły się w blokach wyświetlanych w labiryncie.
-     * przyjmuje obrazy załadowane przez loadImages oraz wartości h- wysokości i w- szerokości żądanej dla przeskalowanego
+     * klasa getScaledImage() opisuje skalowanie obrazow by miescily sie w blokach wyswietlanych w labiryncie.
+     * przyjmuje obrazy zaladowane przez loadImages oraz wartosci h- wysokosci i w- szerokosci zadanej dla przeskalowanego
      * obrazu.
      */
     private Image getScaledImage(Image srcImg, int w, int h){
@@ -111,7 +116,7 @@ public class Game extends JPanel implements ActionListener {
     }
 
     /**
-     * klasa initVariables() opisuje początkowe ustawienie ważnych zmiennych.
+     * klasa initVariables() opisuje poczatkowe ustawienie waznych zmiennych.
      */
 
     private void initVariables() {
@@ -130,7 +135,7 @@ public class Game extends JPanel implements ActionListener {
         timer.start();
     }
     /**
-     * klasa playGame() opisuje zasady działania gry (sprawdzanie czy może się ona toczyć, inicjalizowanie)
+     * klasa playGame() opisuje zasady dzialania gry (sprawdzanie czy moze sie ona toczyc, inicjalizowanie)
      */
     private void playGame(Graphics2D g2d) {
 
@@ -149,7 +154,7 @@ public class Game extends JPanel implements ActionListener {
         }
     }
     /**
-     * klasa showIntroScreen() opisuje w którym miejscu i w jakim formacie wyświetla się na ekranie warunek rozpoczęcia gry
+     * klasa showIntroScreen() opisuje w ktorym miejscu i w jakim formacie wyswietla sie na ekranie warunek rozpoczecia gry
      * "press SPACE to start"
      */
     private void showIntroScreen(Graphics2D g2d) {
@@ -159,7 +164,7 @@ public class Game extends JPanel implements ActionListener {
         g2d.drawString(start, (SCREEN_SIZE_X)/3, 400);
     }
     /**
-     * klasa drawScore() opisuje w którym miejscu i w jakim formacie wyświetlać na ekranie aktualną ilość punktów
+     * klasa drawScore() opisuje w ktorym miejscu i w jakim formacie wyswietlac na ekranie aktualna ilosc punktow
      */
     private void drawScore(Graphics2D g) {
         g.setFont(smallFont);
@@ -172,7 +177,7 @@ public class Game extends JPanel implements ActionListener {
         }
     }
     /**
-     * klasa checkMaze() opisuje czy gra już się skończyła jeśli tak to dodaje punkty (nie do końca działa)
+     * klasa checkMaze() opisuje czy gra juz sie skonczyla jesli tak to dodaje punkty (nie do konca dziala)
      */
     private void checkMaze() {
 
@@ -194,7 +199,7 @@ public class Game extends JPanel implements ActionListener {
         }
     }
     /**
-     * klasa death() opisuje moment smierci w momencie gdy skończą się życia pacmanowi (niedzwiedziowi)
+     * klasa death() opisuje moment smierci w momencie gdy skoncza sie zycia pacmanowi (niedzwiedziowi)
     */
     private void death() {
 
@@ -213,7 +218,7 @@ public class Game extends JPanel implements ActionListener {
 
     }
     /**
-     * klasa moveGhosts(Graphics2D g2d) opisuje poruszanie się duchów, warunki określające gdzie mogą się ruszać.
+     * klasa moveGhosts(Graphics2D g2d) opisuje poruszanie sie duchow, warunki okreslajace gdzie moga sie ruszac.
      */
     private void moveGhosts(Graphics2D g2d) {
 
@@ -286,15 +291,15 @@ public class Game extends JPanel implements ActionListener {
         }
     }
     /**
-     * klasa drawGhost() opisuje rysowanie ducha (myśliwego) na mapie w momencie gdy jest na danej pozycji.
+     * klasa drawGhost() opisuje rysowanie ducha (mysliwego) na mapie w momencie gdy jest na danej pozycji.
      */
     private void drawGhost(Graphics2D g2d, int x, int y) {
         int minBokProstokatuGry=Math.min((int)(game.getHeight()/Global.iloscWierszy),(int)(game.getWidth()/Global.iloscKolumn));
         g2d.drawImage(getScaledImage(ghost,BLOCK_SIZE,BLOCK_SIZE), x*minBokProstokatuGry/BLOCK_SIZE, y*minBokProstokatuGry/BLOCK_SIZE,minBokProstokatuGry, minBokProstokatuGry, this);
     }
     /**
-     * klasa movePacman() opisuje sposób poruszania się pacmana (niedźwiedzia) na mapie oraz warunki gdzie może a gdzie nie się ruszyć.
-     * Sprawdza ona również, czy poziom został skończony oraz, jeśli tak, to ładuje następny poziom.
+     * klasa movePacman() opisuje sposob poruszania sie pacmana (niedzwiedzia) na mapie oraz warunki gdzie moze a gdzie nie sie ruszyc.
+     * Sprawdza ona rowniez, czy poziom zostal skonczony oraz, jesli tak, to laduje nastepny poziom.
      */
     private void movePacman() {
 
@@ -330,7 +335,7 @@ public class Game extends JPanel implements ActionListener {
 
             }
 
-            // Sprawdzanie czy stoi ( ͡° ͜ʖ ͡°)
+            // Sprawdzanie czy stoi
             if ((pacmand_x == -1 && pacmand_y == 0 && (screenData[pos-1].equals("s")))
                     || (pacmand_x == 1 && pacmand_y == 0 && (screenData[pos+1].equals("s")))
                     || (pacmand_x == 0 && pacmand_y == -1 && (screenData[pos-Global.iloscKolumn].equals("s")))
@@ -341,7 +346,7 @@ public class Game extends JPanel implements ActionListener {
         }
         pacman_x = pacman_x + PACMAN_SPEED * pacmand_x;
         pacman_y = pacman_y + PACMAN_SPEED * pacmand_y;
-        //PRÓBA ŁADOWANIA NASTĘPNYCH POZIOMÓW
+        //PROBA LADOWANIA NASTEPNYCH POZIOMOW
         if (iloscbip[2] == 0){
             wGrze=false;
             Global.wynikKoncowy=Global.wynikKoncowy+score;
@@ -369,8 +374,8 @@ public class Game extends JPanel implements ActionListener {
         }
 
     /**
-     * klasa drawPacman() opisuje rysowanie pacmana (niedzwiedzia) w zależności od tego w którym kierunku się porusza
-     * (jeszcze brak obrazków niedzwiedzia odwróconego w danym kierunku)
+     * klasa drawPacman() opisuje rysowanie pacmana (niedzwiedzia) w zaleznosci od tego w ktorym kierunku sie porusza
+     * (jeszcze brak obrazkow niedzwiedzia odwroconego w danym kierunku)
      */
     private void drawPacman(Graphics2D g2d) {
         int minBokProstokatuGry=Math.min((int)(game.getHeight()/Global.iloscWierszy),(int)(game.getWidth()/Global.iloscKolumn));
@@ -385,7 +390,7 @@ public class Game extends JPanel implements ActionListener {
         }
     }
     /**
-     * klasa drawMaze() opisuje sposób wyrysowywania labiryntu w którym użytkownik się porusza.
+     * klasa drawMaze() opisuje sposob wyrysowywania labiryntu w ktorym uzytkownik sie porusza.
      */
     private void drawMaze(Graphics2D g2d, Dimension GameWindow) {
         int i = 0;
@@ -422,7 +427,7 @@ public class Game extends JPanel implements ActionListener {
         }
     }
     /**
-     * klasa initGame() opisuje startowe wartości życia, wyniku, ilosci duchów (myśliwych) oraz prędkość.
+     * klasa initGame() opisuje startowe wartosci zycia, wyniku, ilosci duchow (mysliwych) oraz predkosc.
      */
     private void initGame() {
 
@@ -433,8 +438,8 @@ public class Game extends JPanel implements ActionListener {
         currentSpeed = 3;
     }
     /**
-     * klasa initLevel() opisuje uruchamianie danego poziomu wykorzystując dane ze zmiennych globalnych w których są informacje
-     * o wielkości mapy oraz jej konstrukcji (gdzie ściany, borówki i porzeczki)
+     * klasa initLevel() opisuje uruchamianie danego poziomu wykorzystujac dane ze zmiennych globalnych w ktorych sa informacje
+     * o wielkosci mapy oraz jej konstrukcji (gdzie sciany, borowki i porzeczki)
      */
     private void initLevel() {
         int i;
@@ -445,9 +450,9 @@ public class Game extends JPanel implements ActionListener {
             continueLevel();
     }
     /**
-     * klasa continueLevel() opisuje warunki kontynuowania poziomu. W innej klasie jest wywoływany po sprawdzeniu
-     * czy gra nie jest skończona (śmierć lub koniec poziomu) pozwala na dalsze poruszanie się duchów (myśliwych) oraz
-     * pacmana (niedźwiedzia) na początku rozgrywki ustawia również ich pozycję.
+     * klasa continueLevel() opisuje warunki kontynuowania poziomu. W innej klasie jest wywolywany po sprawdzeniu
+     * czy gra nie jest skonczona (smierc lub koniec poziomu) pozwala na dalsze poruszanie sie duchow (mysliwych) oraz
+     * pacmana (niedzwiedzia) na poczatku rozgrywki ustawia rowniez ich pozycje.
      */
     private void continueLevel() {
 
@@ -480,7 +485,7 @@ public class Game extends JPanel implements ActionListener {
         smierc = false;
     }
     /**
-     * klasa paintComponent() opisuje sposób rysowania labiryntu oraz wyniku na ekranie
+     * klasa paintComponent() opisuje sposob rysowania labiryntu oraz wyniku na ekranie
      */
 
     public void paintComponent(Graphics g) {
@@ -506,7 +511,7 @@ public class Game extends JPanel implements ActionListener {
     }
 
     /**
-     * klasa TAdapter() opisuje nasłuchiwanie na sygnał z klawiatury by program wiedział jak ma się poruszyć pacman (niedźwiedż)
+     * klasa TAdapter() opisuje nasluchiwanie na sygnal z klawiatury by program wiedzial jak ma sie poruszyc pacman (niedzwiedz)
      */
 
     class TAdapter extends KeyAdapter {

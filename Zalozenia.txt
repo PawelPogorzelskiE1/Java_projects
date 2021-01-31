@@ -1,32 +1,32 @@
-Symulator Polowania na Niedźwiedzia 2020
+Symulator Polowania na Niedzwiedzia 2020
 
-Plansza składa się z elementów 3 typów:
--leśny busz - ściany ograniczające poruszanie się
+Plansza sklada sie z elementow 3 typow:
+-lesny busz - sciany ograniczajace poruszanie sie
 -postacie:
-	niedźwiedź - awatar użytkownika
-	myśliwy - przeciwnik niedźwiedzia - spotkanie skutkuje utratą życia przez niedźwiedzia
+	niedzwiedz - awatar uzytkownika
+	mysliwy - przeciwnik niedzwiedzia - spotkanie skutkuje utrata zycia przez niedzwiedzia
 -collectable:
-	borówki - punkty, których zebranie wymagane jest do ukończenia poziomu
-	porzeczki - bonus zapewniający superumiejętność niedźwiedzia o nazwie "kiedy zwierzyna staje się łowcą"
+	borowki - punkty, ktorych zebranie wymagane jest do ukonczenia poziomu
+	porzeczki - bonus zapewniajacy superumiejetnosc niedzwiedzia o nazwie "kiedy zwierzyna staje sie lowca"
 
 Punktacja:
-Gra zakłada stworzenie rankingu i dodawanie do niego ukończonych (z powodzeniem lub też nie) gier użytkownika. Punkty, wg których szeregowany będzie ranking zależą od:
-	ilości ukończonych planszy
-	ilości żyć, z jakimi użytkownik skończył grę
-	ilości pokonanych myśliwych
-	poziomu trudności (w zależności od poziomu trudności przy końcu gry mamy inny mnożnik punktów: łatwy - 0,75; normalny - 1; trudny - 1,25)
+Gra zaklada stworzenie rankingu i dodawanie do niego ukonczonych (z powodzeniem lub tez nie) gier uzytkownika. Punkty, wg ktorych szeregowany bedzie ranking zaleza od:
+	ilosci ukonczonych planszy
+	ilosci zyc, z jakimi uzytkownik skonczyl gre
+	ilosci pokonanych mysliwych
+	poziomu trudnosci (w zaleznosci od poziomu trudnosci przy koncu gry mamy inny mnoznik punktow: latwy - 0,75; normalny - 1; trudny - 1,25)
 
-Poziom trudności:
-Do wyboru n poziomów trudności (najprawdopodobniej 3), poziom będzie wpływać na ilość duchów, ich szybkość, ilość żyć z którymi startuje użytkownik, ilość bonusów na mapie
+Poziom trudnosci:
+Do wyboru n poziomow trudnosci (najprawdopodobniej 3), poziom bedzie wplywac na ilosc duchow, ich szybkosc, ilosc zyc z ktorymi startuje uzytkownik, ilosc bonusow na mapie
 
-Wybór planszy:
-Użytkownik może wybrać ile poziomów chce przejść
-(od 1 do k, gdzie k - liczba zaimplementowanych poziomów), zanim gra dobiegnie końca (o ile nie straci wcześniej wszystkich żyć)
+Wybor planszy:
+Uzytkownik moze wybrac ile poziomow chce przejsc
+(od 1 do k, gdzie k - liczba zaimplementowanych poziomow), zanim gra dobiegnie konca (o ile nie straci wczesniej wszystkich zyc)
 
-Przy uruchomieniu gry pojawia się lista dostępnych operacji:
+Przy uruchomieniu gry pojawia sie lista dostepnych operacji:
 1. Nowa gra
 	a) podaj nick:
 		START
-2. Tabela wyników
+2. Tabela wynikow
 3. Ustawienia
 4. Pomoc

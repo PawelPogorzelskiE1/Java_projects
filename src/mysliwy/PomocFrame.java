@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
- * klasa PomocFrame() opisuje Sposób rysowania i obsługi panelu z Pomocą - opis zasad gry i poruszania się
+ * klasa PomocFrame() opisuje Sposob rysowania i obslugi panelu z Pomoca - opis zasad gry i poruszania sie
  */
 public class PomocFrame extends JFrame implements ActionListener{
     public PomocFrame(){
@@ -34,7 +34,7 @@ public class PomocFrame extends JFrame implements ActionListener{
 
             /*panel.setLayout(null);
             add(panel);
-            //Można to zrobić labelami, lub żeby było wygodniej napisać gdzieś ładnie sformatowane zasady i wkleić je jako zdjęcie co sugeruję
+            //Mozna to zrobic labelami, lub zeby bylo wygodniej napisac gdzies ladnie sformatowane zasady i wkleic je jako zdjecie co sugeruje
             JLabel tekst = new JLabel("Tutaj opis zasad gry");
             tekst.setBounds(40, 10, 240, 20);
             panel.add(tekst);*/
@@ -96,7 +96,7 @@ public class PomocFrame extends JFrame {
         add(panel);
 
 
-        //Można to zrobić labelami, lub żeby było wygodniej napisać gdzieś ładnie sformatowane zasady i wkleić je jako zdjęcie co sugeruję
+        //Mozna to zrobic labelami, lub zeby bylo wygodniej napisac gdzies ladnie sformatowane zasady i wkleic je jako zdjecie co sugeruje
         JLabel tekst = new JLabel("Tutaj opis zasad gry");
         tekst.setBounds(40, 10, 240, 20);
         panel.add(tekst);

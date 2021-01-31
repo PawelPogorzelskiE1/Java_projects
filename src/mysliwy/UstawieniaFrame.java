@@ -7,8 +7,8 @@ import java.awt.event.ActionListener;
 
 
 public class UstawieniaFrame extends JFrame implements ActionListener {
-    JButton LatwyUstawieniaButton = new JButton("Mały miś");
-    JButton SredniUstawieniaButton = new JButton("Niedźwiadek");
+    JButton LatwyUstawieniaButton = new JButton("Maly mis");
+    JButton SredniUstawieniaButton = new JButton("Niedzwiadek");
     JButton TrudnyUstawieniaButton = new JButton("Stary Wyga");
     JButton IlosclvlButton = new JButton("Zatwierdz");
     JTextArea fieldIlosclvlUstawienia = new JTextArea();
@@ -27,9 +27,9 @@ public class UstawieniaFrame extends JFrame implements ActionListener {
         add(panel);
 
 
-        //Chyba trzeba będzie zrobić zmienne globalne, lub zmienne wewnątrz klasy StartFrame, które tu byłyby modyfikowane
-        //Miałyby one wpływać na parametry startowe samego Pacmana przy kliknieciu pierwszego przycisku
-        JLabel tekstTrudnoscUstawienia = new JLabel("Wybierz poziom trudności");
+        //Chyba trzeba bedzie zrobic zmienne globalne, lub zmienne wewnatrz klasy StartFrame, ktore tu bylyby modyfikowane
+        //Mialyby one wplywac na parametry startowe samego Pacmana przy kliknieciu pierwszego przycisku
+        JLabel tekstTrudnoscUstawienia = new JLabel("Wybierz poziom trudnosci");
         tekstTrudnoscUstawienia.setBounds(40, 10, 240, 20);
         panel.add(tekstTrudnoscUstawienia);
 
@@ -45,7 +45,7 @@ public class UstawieniaFrame extends JFrame implements ActionListener {
         TrudnyUstawieniaButton.addActionListener(this);
         panel.add(TrudnyUstawieniaButton);
 
-        JLabel tekstIloslvlUstawienia = new JLabel("Wpisz ilość poziomów jaką chcesz rozegrać");
+        JLabel tekstIloslvlUstawienia = new JLabel("Wpisz ilosc poziomow jaka chcesz rozegrac");
         tekstIloslvlUstawienia.setBounds(40, 200, 240, 20);
         panel.add(tekstIloslvlUstawienia);
 
@@ -56,7 +56,7 @@ public class UstawieniaFrame extends JFrame implements ActionListener {
         IlosclvlButton.addActionListener( this);
         panel.add(IlosclvlButton);
 
-        JLabel tekstIloscRekordowWTablicyWynikow = new JLabel("Wpisz ilość rekordow do wyswietlenia");
+        JLabel tekstIloscRekordowWTablicyWynikow = new JLabel("Wpisz ilosc rekordow do wyswietlenia");
         tekstIloscRekordowWTablicyWynikow.setBounds(40, 340, 240, 20);
         panel.add(tekstIloscRekordowWTablicyWynikow);
 

@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Global {
 
-    // stałe
+    // stale
     //public static final int COLS = 4; formula na otrzymanie przykladowej stalej, pewnie sie do czegos przyda
     public static int Dany_Poziom = 1;
     // zmienne

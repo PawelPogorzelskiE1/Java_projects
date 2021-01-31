@@ -23,8 +23,8 @@ public class KomunikatKoniecGry extends JFrame implements ActionListener {
         add(panel);
 
 
-        //Chyba trzeba będzie zrobić zmienne globalne, lub zmienne wewnątrz klasy StartFrame, które tu byłyby modyfikowane
-        //Miałyby one wpływać na parametry startowe samego Pacmana przy kliknieciu pierwszego przycisku
+        //Chyba trzeba bedzie zrobic zmienne globalne, lub zmienne wewnatrz klasy StartFrame, ktore tu bylyby modyfikowane
+        //Mialyby one wplywac na parametry startowe samego Pacmana przy kliknieciu pierwszego przycisku
         JLabel tekstTrudnoscUstawienia = new JLabel("Otrzymales "+Global.wynikKoncowy+" punktow.");
         tekstTrudnoscUstawienia.setBounds(40, 10, 240, 20);
         panel.add(tekstTrudnoscUstawienia);

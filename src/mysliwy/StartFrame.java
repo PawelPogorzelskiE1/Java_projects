@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
- * klasa StartFrame() opisuje wyświetlanie Menu głównego oraz obsługę widocznych na nim przycisków.
+ * klasa StartFrame() opisuje wyswietlanie Menu glownego oraz obsluge widocznych na nim przyciskow.
  */
 public class StartFrame extends JFrame implements ActionListener
 {
